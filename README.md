@@ -30,8 +30,8 @@ A modern, professional resume builder application built with React, TypeScript, 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/resumatic.git
-cd resumatic
+git clone https://github.com/GowthamOleti/Resumatic_v1.git
+cd Resumatic_v1
 ```
 
 2. Install dependencies:
