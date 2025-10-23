@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Download, ArrowLeft, LayoutTemplate } from 'lucide-react';
+import { Download, ArrowLeft, LayoutTemplate, RotateCcw } from 'lucide-react';
 import { ResumeData, TemplateType } from '@/types';
 import ResumeForm from '@/components/ResumeForm';
 import ResumePreview from '@/components/ResumePreview';
@@ -162,6 +162,24 @@ const initialData: ResumeData = {
   ],
 };
 
+const emptyData: ResumeData = {
+  personalInfo: {
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    linkedin: '',
+    website: '',
+    summary: '',
+  },
+  workExperience: [],
+  education: [],
+  skills: [],
+  languages: [],
+  certifications: [],
+  projects: [],
+};
+
 export default function BuilderPage() {
   const [resumeData, setResumeData] = useState<ResumeData>(initialData);
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>('modern');
@@ -181,6 +199,12 @@ export default function BuilderPage() {
       alert('Failed to export PDF. Please try again.');
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  const handleReset = () => {
+    if (window.confirm('Are you sure you want to clear all data and start fresh? This action cannot be undone.')) {
+      setResumeData(emptyData);
     }
   };
 
@@ -255,6 +279,17 @@ export default function BuilderPage() {
                 <LayoutTemplate className="h-4 w-4" />
                 <span className="hidden sm:inline">{getTemplateName(selectedTemplate)}</span>
                 <span className="sm:hidden">Template</span>
+              </Button>
+
+              {/* Reset Button */}
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                className="gap-2"
+                size="sm"
+              >
+                <RotateCcw className="h-4 w-4" />
+                <span className="hidden sm:inline">Reset</span>
               </Button>
 
               {/* Download PDF Button */}
