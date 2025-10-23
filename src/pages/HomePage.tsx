@@ -47,7 +47,7 @@ export default function HomePage() {
     // Start animations after a brief delay
     setTimeout(() => {
       animateCounter(12547, setResumeCount);
-      animateCounter(4, setTemplateCount, 1000);
+      animateCounter(7, setTemplateCount, 1000);
     }, 500);
   }, []);
 
@@ -197,7 +197,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Grid */}
-      <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24 relative bg-white">
+      <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24 relative">
         <div className="text-center mb-12 sm:mb-20">
           <div className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-4">
             Features
