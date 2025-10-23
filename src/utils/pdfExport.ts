@@ -2,7 +2,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { ResumeData, TemplateType } from '../types';
 
-export async function exportToPDF(data: ResumeData, template: TemplateType): Promise<void> {
+export async function exportToPDF(data: ResumeData, _template: TemplateType): Promise<void> {
   const resumeElement = document.getElementById('resume-preview');
   
   if (!resumeElement) {
