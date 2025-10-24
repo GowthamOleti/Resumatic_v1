@@ -46,7 +46,6 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     const imgData = canvas.toDataURL('image/png');
     
     let heightLeft = imgHeight;
-    let position = 0;
     let pageNumber = 0;
 
     // Add pages with proper padding and content positioning
