@@ -46,23 +46,20 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    let heightLeft = imgHeight;
-    let currentPage = 0;
-
-    // Add pages
-    while (heightLeft > 0) {
-      if (currentPage > 0) {
+    // Calculate how many pages we need
+    const totalPages = Math.ceil(imgHeight / contentHeight);
+    
+    // Add each page
+    for (let pageNum = 0; pageNum < totalPages; pageNum++) {
+      if (pageNum > 0) {
         pdf.addPage();
       }
       
-      // Calculate position for this page
-      const yPosition = padding - (currentPage * contentHeight);
+      // Position the image so the correct portion shows on this page
+      // Each page moves the image UP by contentHeight to show the next section
+      const yPosition = padding - (pageNum * contentHeight);
       
-      // Add the image (showing different portion on each page)
       pdf.addImage(imgData, 'PNG', padding, yPosition, imgWidth, imgHeight);
-      
-      heightLeft -= contentHeight;
-      currentPage++;
     }
 
     // Generate filename
