@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { TemplateType } from '@/types';
 import { 
   Dialog,
@@ -7,7 +8,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, Sparkles, Briefcase, Code, Palette, FileText, Building2, Minimize2, XCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { CheckCircle2, Sparkles, Briefcase, Code, Palette, FileText, Building2, Minimize2, XCircle, GraduationCap, Users, Rocket, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface TemplateSelectorProps {
@@ -28,7 +30,62 @@ interface TemplateInfo {
   imageUrl: string;
   recommended?: boolean;
   new?: boolean;
+  bestFor: string[];
 }
+
+type UseCase = 'all' | 'student' | 'internship' | 'first-job' | 'senior' | 'career-change' | 'tech';
+
+interface UseCaseOption {
+  id: UseCase;
+  label: string;
+  icon: React.ReactNode;
+  description: string;
+}
+
+const useCaseOptions: UseCaseOption[] = [
+  {
+    id: 'all',
+    label: 'Show All',
+    icon: <Sparkles className="h-4 w-4" />,
+    description: 'Browse all templates'
+  },
+  {
+    id: 'student',
+    label: 'Student / Recent Grad',
+    icon: <GraduationCap className="h-4 w-4" />,
+    description: 'Perfect for students and recent graduates'
+  },
+  {
+    id: 'internship',
+    label: 'Internship',
+    icon: <Rocket className="h-4 w-4" />,
+    description: 'Land your dream internship'
+  },
+  {
+    id: 'first-job',
+    label: 'First Job',
+    icon: <Users className="h-4 w-4" />,
+    description: 'Starting your career journey'
+  },
+  {
+    id: 'senior',
+    label: 'Senior / Executive',
+    icon: <Building2 className="h-4 w-4" />,
+    description: 'For experienced professionals'
+  },
+  {
+    id: 'career-change',
+    label: 'Career Change',
+    icon: <TrendingUp className="h-4 w-4" />,
+    description: 'Transitioning to a new field'
+  },
+  {
+    id: 'tech',
+    label: 'Tech / Developer',
+    icon: <Code className="h-4 w-4" />,
+    description: 'For technical roles'
+  }
+];
 
 const templates: TemplateInfo[] = [
   {
@@ -40,7 +97,8 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-blue-500 to-purple-600',
     features: ['Blue gradient accents', 'Professional layout', 'ATS-friendly'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_3f3478d101914b86a94b87e2060148a7~mv2.png',
-    recommended: true
+    recommended: true,
+    bestFor: ['student', 'first-job', 'internship', 'career-change']
   },
   {
     id: 'executive',
@@ -51,7 +109,8 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-indigo-600 to-blue-800',
     features: ['Navy sidebar', 'Executive style', 'Leadership roles'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_ede979d665e9417fa087494a38873355~mv2.png',
-    new: true
+    new: true,
+    bestFor: ['senior', 'career-change']
   },
   {
     id: 'creative',
@@ -62,7 +121,8 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-purple-500 to-pink-600',
     features: ['Purple gradient', 'Visual design', 'Stand out'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_e7aff14347314152814642eaebd77523~mv2.png',
-    new: true
+    new: true,
+    bestFor: ['student', 'first-job', 'career-change']
   },
   {
     id: 'technical',
@@ -73,7 +133,8 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-green-600 to-teal-600',
     features: ['Terminal style', 'Developer-focused', 'Tech skills'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_3dbd1d9927654d0392a47bd075897d8a~mv2.png',
-    new: true
+    new: true,
+    bestFor: ['tech', 'first-job', 'internship']
   },
   {
     id: 'classic',
@@ -84,6 +145,7 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-gray-700 to-gray-900',
     features: ['Serif font', 'Traditional', 'Timeless'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_438ecda1168249db860ce1056c283520~mv2.png',
+    bestFor: ['senior', 'career-change']
   },
   {
     id: 'professional',
@@ -94,6 +156,7 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-slate-600 to-slate-800',
     features: ['Corporate style', 'Structured', 'Business-ready'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_cda9004a5dd14b33bc5397fb964ec849~mv2.png',
+    bestFor: ['first-job', 'senior', 'career-change']
   },
   {
     id: 'minimal',
@@ -104,6 +167,7 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-gray-500 to-gray-700',
     features: ['Minimalist', 'White space', 'Simple'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_3f9e69e6d61f4495a0502193c206bc8e~mv2.png',
+    bestFor: ['student', 'internship', 'first-job', 'tech']
   },
   {
     id: 'ugly',
@@ -114,7 +178,8 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-red-500 to-orange-600',
     features: ['Comic Sans', 'Rainbow chaos', 'NOT ATS-friendly'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_d3e4e85075154a098fe9ed52cbbcefb6~mv2.png',
-    new: true
+    new: true,
+    bestFor: []
   },
 ];
 
@@ -124,6 +189,12 @@ export default function TemplateSelector({
   selectedTemplate,
   onSelectTemplate,
 }: TemplateSelectorProps) {
+  const [selectedUseCase, setSelectedUseCase] = useState<UseCase>('all');
+
+  const filteredTemplates = selectedUseCase === 'all' 
+    ? templates 
+    : templates.filter(template => template.bestFor.includes(selectedUseCase));
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
@@ -134,8 +205,36 @@ export default function TemplateSelector({
           </DialogDescription>
         </DialogHeader>
 
+        {/* Quick Recommendations */}
+        <div className="mt-4">
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">Quick Recommendations</h3>
+          <div className="flex flex-wrap gap-2">
+            {useCaseOptions.map((useCase) => (
+              <Button
+                key={useCase.id}
+                variant={selectedUseCase === useCase.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedUseCase(useCase.id)}
+                className={cn(
+                  "gap-2",
+                  selectedUseCase === useCase.id && "shadow-md"
+                )}
+              >
+                {useCase.icon}
+                <span className="hidden sm:inline">{useCase.label}</span>
+                <span className="sm:hidden">{useCase.label.split(' ')[0]}</span>
+              </Button>
+            ))}
+          </div>
+          {selectedUseCase !== 'all' && (
+            <p className="text-xs text-gray-500 mt-2">
+              {useCaseOptions.find(u => u.id === selectedUseCase)?.description}
+            </p>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-          {templates.map((template) => (
+          {filteredTemplates.map((template) => (
             <button
               key={template.id}
               onClick={() => {
