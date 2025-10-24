@@ -113,7 +113,7 @@ const templates: TemplateInfo[] = [
     color: 'text-red-600',
     bgGradient: 'from-red-500 to-orange-600',
     features: ['Comic Sans', 'Rainbow chaos', 'NOT ATS-friendly'],
-    imageUrl: 'https://images.unsplash.com/photo-1618556450994-a6a128ef0d9d?w=400&h=500&fit=crop',
+    imageUrl: 'https://static.wixstatic.com/media/5c0589_d3e4e85075154a098fe9ed52cbbcefb6~mv2.png',
     new: true
   },
 ];
