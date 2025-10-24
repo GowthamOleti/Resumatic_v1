@@ -30,7 +30,7 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
     const imgWidth = a4Width - (2 * padding); // Width minus left and right padding
-    const usablePageHeight = a4Height - (2 * padding); // Height minus top and bottom padding
+    const pageHeight = a4Height;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     
     // Create PDF
@@ -42,46 +42,22 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       hotfixes: ['px_scaling']
     });
 
-    // Calculate how many pages we need
-    const totalPages = Math.ceil(imgHeight / usablePageHeight);
+    let heightLeft = imgHeight;
+    let position = padding; // Start with top padding
+
+    // Convert canvas to high-quality image
+    const imgData = canvas.toDataURL('image/png');
     
-    // Process each page separately by cropping the canvas
-    for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
-      if (pageIndex > 0) {
-        pdf.addPage();
-      }
-      
-      // Calculate the portion of canvas to extract for this page
-      const sourceY = pageIndex * usablePageHeight * (canvas.height / imgHeight);
-      const sourceHeight = Math.min(
-        usablePageHeight * (canvas.height / imgHeight),
-        canvas.height - sourceY
-      );
-      
-      // Create a temporary canvas for this page's content
-      const pageCanvas = document.createElement('canvas');
-      const pageCtx = pageCanvas.getContext('2d');
-      
-      if (!pageCtx) continue;
-      
-      // Set canvas size for this page
-      pageCanvas.width = canvas.width;
-      pageCanvas.height = sourceHeight;
-      
-      // Draw only the portion needed for this page
-      pageCtx.drawImage(
-        canvas,
-        0, sourceY,                    // Source x, y
-        canvas.width, sourceHeight,    // Source width, height
-        0, 0,                          // Destination x, y
-        canvas.width, sourceHeight     // Destination width, height
-      );
-      
-      // Convert this page's canvas to image and add to PDF
-      const pageImgData = pageCanvas.toDataURL('image/png');
-      const pageImgHeight = (sourceHeight * imgWidth) / canvas.width;
-      
-      pdf.addImage(pageImgData, 'PNG', padding, padding, imgWidth, pageImgHeight);
+    // Add first page with padding
+    pdf.addImage(imgData, 'PNG', padding, position, imgWidth, imgHeight);
+    heightLeft -= (pageHeight - (2 * padding)); // Account for top and bottom padding
+
+    // Add additional pages if content overflows
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight + padding;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', padding, position, imgWidth, imgHeight);
+      heightLeft -= (pageHeight - (2 * padding));
     }
 
     // Generate filename

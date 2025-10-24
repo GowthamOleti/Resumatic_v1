@@ -19,7 +19,7 @@ export default function ClassicTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: 'Georgia, "Times New Roman", serif',
-      padding: '12px',
+      padding: '32px',
       width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',

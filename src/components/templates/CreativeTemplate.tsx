@@ -19,7 +19,7 @@ export default function CreativeTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-      padding: '12px',
+      padding: '0',
       width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',

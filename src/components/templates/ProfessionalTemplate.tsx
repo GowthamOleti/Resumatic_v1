@@ -29,7 +29,7 @@ export default function ProfessionalTemplate({ data }: TemplateProps) {
       boxSizing: 'border-box'
     }}>
       {/* Left Sidebar with Background */}
-      <div style={{ backgroundColor: '#f8fafc', padding: '12px', borderRight: '3px solid #e2e8f0' }}>
+      <div style={{ backgroundColor: '#f8fafc', padding: '32px 20px', borderRight: '3px solid #e2e8f0' }}>
         {/* Contact Info */}
         <div style={{ marginBottom: '24px' }}>
           <h2 style={{ 
@@ -135,7 +135,7 @@ export default function ProfessionalTemplate({ data }: TemplateProps) {
       </div>
 
       {/* Right Content */}
-      <div style={{ padding: '12px' }}>
+      <div style={{ padding: '32px' }}>
         {/* Header */}
         <div style={{ marginBottom: '24px', paddingBottom: '14px', borderBottom: '2px solid #e2e8f0' }}>
           <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '8px', color: '#1e293b', letterSpacing: '-0.5px', lineHeight: '1.1' }}>

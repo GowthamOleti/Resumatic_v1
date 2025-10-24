@@ -348,7 +348,7 @@ export default function BuilderPage() {
             </div>
             
             <div className="h-[700px] lg:h-[750px] overflow-y-auto p-4 sm:p-6 bg-gray-50 flex items-start justify-center">
-              <div className="shadow-lg" style={{ width: '210mm', transform: 'scale(0.85)', transformOrigin: 'top center' }}>
+              <div className="shadow-lg rounded-lg overflow-hidden" style={{ width: '210mm', transform: 'scale(0.85)', transformOrigin: 'top center' }}>
                 <div className="resume-preview">
                   {renderTemplate()}
                 </div>
@@ -375,7 +375,7 @@ export default function BuilderPage() {
               </div>
             </div>
             <div className="p-4 bg-gray-50 overflow-auto flex items-start justify-center" style={{ minHeight: '500px' }}>
-              <div className="shadow-lg" style={{ 
+              <div className="shadow-lg rounded-lg overflow-hidden" style={{ 
                 width: '210mm', 
                 minWidth: '210mm', 
                 minHeight: '297mm',
