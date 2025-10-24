@@ -1,0 +1,7 @@
+# Robots.txt for Resumatic
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://resumatic.vercel.app/sitemap.xml
+
