@@ -15,6 +15,7 @@ import ProfessionalTemplate from '@/components/templates/ProfessionalTemplate';
 import ExecutiveTemplate from '@/components/templates/ExecutiveTemplate';
 import CreativeTemplate from '@/components/templates/CreativeTemplate';
 import TechnicalTemplate from '@/components/templates/TechnicalTemplate';
+import UglyTemplate from '@/components/templates/UglyTemplate';
 
 const initialData: ResumeData = {
   personalInfo: {
@@ -216,7 +217,8 @@ export default function BuilderPage() {
       professional: 'Professional',
       executive: 'Executive',
       creative: 'Creative',
-      technical: 'Technical'
+      technical: 'Technical',
+      ugly: 'I Don\'t Want a Job'
     };
     return names[template];
   };
@@ -237,6 +239,8 @@ export default function BuilderPage() {
         return <CreativeTemplate data={resumeData} />;
       case 'technical':
         return <TechnicalTemplate data={resumeData} />;
+      case 'ugly':
+        return <UglyTemplate data={resumeData} />;
       default:
         return <ModernTemplate data={resumeData} />;
     }
