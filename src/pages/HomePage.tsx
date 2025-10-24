@@ -15,8 +15,6 @@ import {
 
 export default function HomePage() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [resumeCount, setResumeCount] = useState(0);
-  const [templateCount, setTemplateCount] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,30 +23,6 @@ export default function HomePage() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    // Animate counters on page load
-    const animateCounter = (target: number, setter: (val: number) => void, duration: number = 2000) => {
-      const startTime = Date.now();
-      const step = () => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeOutQuad = 1 - Math.pow(1 - progress, 3);
-        setter(Math.floor(easeOutQuad * target));
-        
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        }
-      };
-      requestAnimationFrame(step);
-    };
-
-    // Start animations after a brief delay
-    setTimeout(() => {
-      animateCounter(12547, setResumeCount);
-      animateCounter(7, setTemplateCount, 1000);
-    }, 500);
   }, []);
 
   return (
@@ -139,23 +113,22 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Live Counter */}
-            <div className="mb-12 sm:mb-16 animate-fade-in animation-delay-600">
-              <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 px-4">
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-1 tabular-nums">
-                    {resumeCount.toLocaleString()}+
-                  </div>
-                  <div className="text-sm sm:text-base text-gray-600 font-medium">Resumes Created</div>
+            {/* Key Selling Points */}
+            <div className="mb-12 sm:mb-16 animate-fade-in animation-delay-600 max-w-3xl mx-auto">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 px-4">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 border-2 border-green-500">
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <span className="font-semibold text-green-900">100% Free Forever</span>
                 </div>
                 
-                <div className="hidden sm:block w-px h-12 bg-gray-300"></div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border-2 border-blue-500">
+                  <Download className="h-5 w-5 text-blue-600" />
+                  <span className="font-semibold text-blue-900">Unlimited Downloads</span>
+                </div>
                 
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-green-600 mb-1 tabular-nums">
-                    {templateCount}
-                  </div>
-                  <div className="text-sm sm:text-base text-gray-600 font-medium">Premium Templates</div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 border-2 border-purple-500">
+                  <Zap className="h-5 w-5 text-purple-600" />
+                  <span className="font-semibold text-purple-900">No Sign-in Required</span>
                 </div>
               </div>
             </div>
@@ -167,28 +140,28 @@ export default function HomePage() {
                   <CheckCircle2 className="h-6 w-6 text-green-600" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">100% Free</h3>
-                  <p className="text-sm text-gray-600">No hidden costs</p>
+                  <h3 className="font-semibold text-gray-900 mb-1">Completely Free</h3>
+                  <p className="text-sm text-gray-600">No payment, no credit card</p>
                 </div>
               </div>
               
               <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Zap className="h-6 w-6 text-blue-600" />
+                  <Download className="h-6 w-6 text-blue-600" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">ATS Optimized</h3>
-                  <p className="text-sm text-gray-600">Beat the bots</p>
+                  <h3 className="font-semibold text-gray-900 mb-1">Unlimited Downloads</h3>
+                  <p className="text-sm text-gray-600">Download as many times as you want</p>
                 </div>
               </div>
               
               <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                  <Download className="h-6 w-6 text-purple-600" />
+                  <Zap className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">Instant PDF</h3>
-                  <p className="text-sm text-gray-600">Download ready</p>
+                  <h3 className="font-semibold text-gray-900 mb-1">No Account Needed</h3>
+                  <p className="text-sm text-gray-600">Start building instantly</p>
                 </div>
               </div>
             </div>
@@ -280,65 +253,6 @@ export default function HomePage() {
               </CardDescription>
             </CardHeader>
           </Card>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-gradient-to-br from-gray-50 to-blue-50/30 py-16 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-20">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-4">
-              Testimonials
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 text-gray-900">Loved by Job Seekers</h2>
-            <p className="text-base sm:text-xl text-gray-600 px-4 max-w-2xl mx-auto">
-              Join thousands who've already landed their dream jobs
-            </p>
-          </div>
-        
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {[
-            {
-              name: "Sarah Johnson",
-              role: "Software Engineer",
-              content: "This resume builder helped me land my dream job at a top tech company. The ATS scanner was incredibly helpful!"
-            },
-            {
-              name: "Michael Chen",
-              role: "Product Manager",
-              content: "The templates are beautiful and professional. I received more interview calls after switching to this resume."
-            },
-            {
-              name: "Emily Rodriguez",
-              role: "UX Designer",
-              content: "So easy to use! I created a stunning resume in less than 30 minutes. Highly recommended!"
-            }
-          ].map((testimonial, i) => (
-            <Card key={i} className="border-0 bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <CardHeader>
-                <div className="flex gap-0.5 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <CardDescription className="text-base leading-relaxed text-gray-700 font-medium">
-                  "{testimonial.content}"
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
-                    {testimonial.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
         </div>
       </section>
 
