@@ -13,7 +13,7 @@ export default function UglyTemplate({ data }: TemplateProps) {
       padding: '40px',
       width: '100%',
       minHeight: '100%',
-      background: 'repeating-linear-gradient(45deg, #ffff00 0px, #ff00ff 100px, #00ffff 200px, #ff0000 300px, #00ff00 400px)',
+      backgroundColor: '#ffffff',
       color: '#000000',
       lineHeight: '1.2',
       boxSizing: 'border-box'
