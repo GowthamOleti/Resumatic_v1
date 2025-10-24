@@ -19,7 +19,7 @@ export default function TechnicalTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: '"JetBrains Mono", "Fira Code", "SF Mono", Monaco, "Courier New", monospace',
-      padding: '32px',
+      padding: '12px',
       width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',

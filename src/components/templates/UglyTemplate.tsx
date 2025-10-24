@@ -11,7 +11,7 @@ export default function UglyTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: 'Comic Sans MS, cursive',
-      padding: '40px',
+      padding: '12px',
       width: '100%',
       minHeight: '100%',
       backgroundColor: '#ffffff',

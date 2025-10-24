@@ -20,7 +20,7 @@ export default function ModernTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-      padding: '32px',
+      padding: '12px',
       width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',

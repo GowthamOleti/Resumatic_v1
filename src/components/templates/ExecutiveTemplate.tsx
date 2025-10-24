@@ -32,7 +32,7 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
         width: '35%', 
         backgroundColor: '#1e3a5f',
         color: '#ffffff',
-        padding: '40px 28px',
+        padding: '12px',
         display: 'flex',
         flexDirection: 'column',
         gap: '28px'
@@ -139,7 +139,7 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
       {/* Right Content Area */}
       <div style={{ 
         flex: 1, 
-        padding: '40px 36px',
+        padding: '12px',
         display: 'flex',
         flexDirection: 'column',
         gap: '28px'

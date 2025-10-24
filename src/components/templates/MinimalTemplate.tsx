@@ -19,7 +19,7 @@ export default function MinimalTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-      padding: '32px 40px',
+      padding: '12px',
       width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',

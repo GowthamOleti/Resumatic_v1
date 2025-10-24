@@ -27,11 +27,10 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
 
     // Calculate dimensions for PDF (A4 size) with padding
     const padding = 10; // 10mm padding on all sides
-    const pageBreakBuffer = 15; // Extra buffer to avoid cutting text at page breaks
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
     const imgWidth = a4Width - (2 * padding); // Width minus left and right padding
-    const usablePageHeight = a4Height - (2 * padding) - pageBreakBuffer; // Reduced height to avoid text cuts
+    const usablePageHeight = a4Height - (2 * padding); // Height minus top and bottom padding
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     
     // Create PDF
