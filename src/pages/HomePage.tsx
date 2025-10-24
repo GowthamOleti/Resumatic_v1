@@ -41,6 +41,7 @@ export default function HomePage() {
                 alt="Resumatic" 
                 className="h-8 sm:h-10 w-auto"
               />
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">Resumatic</span>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link to="/builder">
@@ -264,6 +265,7 @@ export default function HomePage() {
                 alt="Resumatic" 
                 className="h-8 w-auto"
               />
+              <span className="text-lg font-bold text-gray-900">Resumatic</span>
             </div>
             <p className="text-xs sm:text-sm text-gray-600 text-center">
               © 2025 Resumatic. Built with ❤️ for job seekers.
