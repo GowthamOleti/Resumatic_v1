@@ -21,21 +21,22 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
       display: 'flex',
       width: '100%',
-      height: '100%',
+      minHeight: '100%',
       backgroundColor: '#ffffff',
       color: '#1a1a1a',
       lineHeight: '1.5',
       boxSizing: 'border-box'
     }}>
-      {/* Left Sidebar - Dark Navy */}
+      {/* Left Sidebar - Dark Navy - Full Height */}
       <div style={{ 
         width: '35%', 
         backgroundColor: '#1e3a5f',
         color: '#ffffff',
-        padding: '12px',
+        padding: '32px 12px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '28px'
+        gap: '28px',
+        alignSelf: 'stretch'
       }}>
         {/* Contact Info */}
         <div>
@@ -139,7 +140,7 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
       {/* Right Content Area */}
       <div style={{ 
         flex: 1, 
-        padding: '12px',
+        padding: '32px 16px 16px 16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '28px'
