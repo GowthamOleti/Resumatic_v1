@@ -42,23 +42,46 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       hotfixes: ['px_scaling']
     });
 
-    // Convert canvas to high-quality image
-    const imgData = canvas.toDataURL('image/png');
-    
     // Calculate how many pages we need
     const totalPages = Math.ceil(imgHeight / usablePageHeight);
     
-    // Add pages with proper content positioning - each page shows a different section
+    // Process each page separately by cropping the canvas
     for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
       if (pageIndex > 0) {
         pdf.addPage();
       }
       
-      // Calculate which portion of the image to show on this page
-      // Negative Y position moves the image up to show lower sections
-      const yPosition = padding - (pageIndex * usablePageHeight);
+      // Calculate the portion of canvas to extract for this page
+      const sourceY = pageIndex * usablePageHeight * (canvas.height / imgHeight);
+      const sourceHeight = Math.min(
+        usablePageHeight * (canvas.height / imgHeight),
+        canvas.height - sourceY
+      );
       
-      pdf.addImage(imgData, 'PNG', padding, yPosition, imgWidth, imgHeight);
+      // Create a temporary canvas for this page's content
+      const pageCanvas = document.createElement('canvas');
+      const pageCtx = pageCanvas.getContext('2d');
+      
+      if (!pageCtx) continue;
+      
+      // Set canvas size for this page
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = sourceHeight;
+      
+      // Draw only the portion needed for this page
+      pageCtx.drawImage(
+        canvas,
+        0, sourceY,                    // Source x, y
+        canvas.width, sourceHeight,    // Source width, height
+        0, 0,                          // Destination x, y
+        canvas.width, sourceHeight     // Destination width, height
+      );
+      
+      // Convert this page's canvas to image and add to PDF
+      const pageImgData = pageCanvas.toDataURL('image/png');
+      const pageImgHeight = (sourceHeight * imgWidth) / canvas.width;
+      
+      pdf.addImage(pageImgData, 'PNG', padding, padding, imgWidth, pageImgHeight);
     }
 
     // Generate filename
