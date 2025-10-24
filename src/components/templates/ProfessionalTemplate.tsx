@@ -1,4 +1,5 @@
 import { ResumeData } from '../../types';
+import { ensureProtocol } from '../../utils/urlHelper';
 
 interface TemplateProps {
   data: ResumeData;
@@ -45,8 +46,8 @@ export default function ProfessionalTemplate({ data }: TemplateProps) {
             {personalInfo.email && <div style={{ marginBottom: '6px', wordBreak: 'break-word' }}>{personalInfo.email}</div>}
             {personalInfo.phone && <div style={{ marginBottom: '6px' }}>{personalInfo.phone}</div>}
             {personalInfo.location && <div style={{ marginBottom: '6px' }}>{personalInfo.location}</div>}
-            {personalInfo.linkedin && <div style={{ marginBottom: '6px', wordBreak: 'break-word' }}><a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.linkedin}</a></div>}
-            {personalInfo.website && <div style={{ wordBreak: 'break-word' }}><a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.website}</a></div>}
+            {personalInfo.linkedin && <div style={{ marginBottom: '6px', wordBreak: 'break-word' }}><a href={ensureProtocol(personalInfo.linkedin)} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.linkedin}</a></div>}
+            {personalInfo.website && <div style={{ wordBreak: 'break-word' }}><a href={ensureProtocol(personalInfo.website)} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.website}</a></div>}
           </div>
         </div>
 

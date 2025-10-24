@@ -1,4 +1,5 @@
 import { ResumeData } from '../../types';
+import { ensureProtocol } from '../../utils/urlHelper';
 
 interface TemplateProps {
   data: ResumeData;
@@ -54,9 +55,9 @@ export default function ModernTemplate({ data }: TemplateProps) {
           {personalInfo.location && <span>•</span>}
           {personalInfo.location && <span>{personalInfo.location}</span>}
           {personalInfo.linkedin && <span>•</span>}
-          {personalInfo.linkedin && <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.linkedin}</a>}
+          {personalInfo.linkedin && <a href={ensureProtocol(personalInfo.linkedin)} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.linkedin}</a>}
           {personalInfo.website && <span>•</span>}
-          {personalInfo.website && <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.website}</a>}
+          {personalInfo.website && <a href={ensureProtocol(personalInfo.website)} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.website}</a>}
         </div>
       </div>
 

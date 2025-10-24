@@ -1,4 +1,5 @@
 import { ResumeData } from '../../types';
+import { ensureProtocol } from '../../utils/urlHelper';
 
 interface TemplateProps {
   data: ResumeData;
@@ -95,7 +96,7 @@ export default function CreativeTemplate({ data }: TemplateProps) {
               borderRadius: '6px',
               backdropFilter: 'blur(10px)'
             }}>
-              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>{personalInfo.linkedin}</a>
+              <a href={ensureProtocol(personalInfo.linkedin)} target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>{personalInfo.linkedin}</a>
             </div>
           )}
           {personalInfo.website && (
@@ -105,7 +106,7 @@ export default function CreativeTemplate({ data }: TemplateProps) {
               borderRadius: '6px',
               backdropFilter: 'blur(10px)'
             }}>
-              <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>{personalInfo.website}</a>
+              <a href={ensureProtocol(personalInfo.website)} target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>{personalInfo.website}</a>
             </div>
           )}
         </div>

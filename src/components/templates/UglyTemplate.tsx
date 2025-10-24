@@ -1,4 +1,5 @@
 import { ResumeData } from '../../types';
+import { ensureProtocol } from '../../utils/urlHelper';
 
 interface TemplateProps {
   data: ResumeData;
@@ -75,8 +76,8 @@ export default function UglyTemplate({ data }: TemplateProps) {
           {personalInfo.email && <div style={{ marginBottom: '5px' }}>📧 {personalInfo.email}</div>}
           {personalInfo.phone && <div style={{ marginBottom: '5px' }}>☎️ {personalInfo.phone}</div>}
           {personalInfo.location && <div style={{ marginBottom: '5px' }}>🌍 {personalInfo.location}</div>}
-          {personalInfo.linkedin && <div style={{ marginBottom: '5px' }}>💼 <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#ff00ff', textDecoration: 'underline' }}>{personalInfo.linkedin}</a></div>}
-          {personalInfo.website && <div>🌐 <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#ff00ff', textDecoration: 'underline' }}>{personalInfo.website}</a></div>}
+          {personalInfo.linkedin && <div style={{ marginBottom: '5px' }}>💼 <a href={ensureProtocol(personalInfo.linkedin)} target="_blank" rel="noopener noreferrer" style={{ color: '#ff00ff', textDecoration: 'underline' }}>{personalInfo.linkedin}</a></div>}
+          {personalInfo.website && <div>🌐 <a href={ensureProtocol(personalInfo.website)} target="_blank" rel="noopener noreferrer" style={{ color: '#ff00ff', textDecoration: 'underline' }}>{personalInfo.website}</a></div>}
         </div>
       </div>
 
