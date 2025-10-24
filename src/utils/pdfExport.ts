@@ -25,14 +25,13 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       windowHeight: resumeElement.scrollHeight
     });
 
-    // Calculate dimensions for PDF (A4 size) with minimal padding
-    const padding = 5; // 5mm padding on all sides (reduced for more content space)
+    // Calculate dimensions for PDF (A4 size)
+    const padding = 0; // No padding - content uses full page
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const contentWidth = a4Width - (2 * padding); // Width minus padding
-    const contentHeight = a4Height - (2 * padding); // Height minus padding
-    const imgWidth = contentWidth;
+    const imgWidth = a4Width;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const pageHeight = a4Height;
     
     // Create PDF
     const pdf = new jsPDF({
@@ -46,20 +45,19 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    // Calculate how many pages we need
-    const totalPages = Math.ceil(imgHeight / contentHeight);
-    
-    // Add each page
-    for (let pageNum = 0; pageNum < totalPages; pageNum++) {
-      if (pageNum > 0) {
-        pdf.addPage();
-      }
-      
-      // Position the image so the correct portion shows on this page
-      // Each page moves the image UP by contentHeight to show the next section
-      const yPosition = padding - (pageNum * contentHeight);
-      
-      pdf.addImage(imgData, 'PNG', padding, yPosition, imgWidth, imgHeight);
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    // Add first page
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    // Add additional pages if needed
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
     }
 
     // Generate filename
