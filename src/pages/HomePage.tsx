@@ -242,12 +242,9 @@ export default function HomePage() {
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 sm:mb-12 text-white">
               Ready to Land Your Dream Job?
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 sm:mb-12 px-4 max-w-2xl mx-auto font-light">
-              Join thousands of successful job seekers who've created winning resumes with Resumatic
-            </p>
             <Link to="/builder">
               <Button size="lg" className="gap-2 text-lg h-14 px-10 bg-white text-blue-600 hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
                 Start Building for Free <ArrowRight className="h-5 w-5" />
