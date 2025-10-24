@@ -26,7 +26,6 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     });
 
     // Calculate dimensions for PDF (A4 size)
-    const padding = 0; // No padding - content uses full page
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
     const imgWidth = a4Width;
