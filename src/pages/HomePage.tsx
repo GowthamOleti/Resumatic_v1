@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   FileText, 
   Zap, 
@@ -9,8 +9,7 @@ import {
   CheckCircle2, 
   Sparkles, 
   LayoutTemplate,
-  ArrowRight,
-  Star
+  ArrowRight
 } from 'lucide-react';
 
 export default function HomePage() {
