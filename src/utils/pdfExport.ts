@@ -30,7 +30,7 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
     const imgWidth = a4Width - (2 * padding); // Width minus left and right padding
-    const pageHeight = a4Height;
+    const usablePageHeight = a4Height - (2 * padding); // Height minus top and bottom padding
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     
     // Create PDF
@@ -42,22 +42,28 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       hotfixes: ['px_scaling']
     });
 
-    let heightLeft = imgHeight;
-    let position = padding; // Start with top padding
-
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    // Add first page with padding
-    pdf.addImage(imgData, 'PNG', padding, position, imgWidth, imgHeight);
-    heightLeft -= (pageHeight - (2 * padding)); // Account for top and bottom padding
+    let heightLeft = imgHeight;
+    let position = 0;
+    let pageNumber = 0;
 
-    // Add additional pages if content overflows
+    // Add pages with proper padding and content positioning
     while (heightLeft > 0) {
-      position = heightLeft - imgHeight + padding;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', padding, position, imgWidth, imgHeight);
-      heightLeft -= (pageHeight - (2 * padding));
+      if (pageNumber > 0) {
+        pdf.addPage();
+      }
+      
+      // Calculate vertical position for this page
+      // First page: start at top with padding
+      // Subsequent pages: offset to show next chunk of content
+      const yPosition = pageNumber === 0 ? padding : -(pageNumber * usablePageHeight) + padding;
+      
+      pdf.addImage(imgData, 'PNG', padding, yPosition, imgWidth, imgHeight);
+      
+      heightLeft -= usablePageHeight;
+      pageNumber++;
     }
 
     // Generate filename
