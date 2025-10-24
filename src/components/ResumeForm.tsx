@@ -236,79 +236,79 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
       <div>
         <h2 className="text-2xl font-bold mb-6">Personal Information</h2>
         <div className="space-y-4">
-          <div>
+    <div>
             <Label htmlFor="fullName">Full Name</Label>
             <Input
               id="fullName"
-              type="text"
-              value={data.personalInfo.fullName}
-              onChange={(e) => updatePersonalInfo('fullName', e.target.value)}
-              placeholder="John Doe"
-            />
-          </div>
+            type="text"
+            value={data.personalInfo.fullName}
+            onChange={(e) => updatePersonalInfo('fullName', e.target.value)}
+            placeholder="John Doe"
+          />
+        </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="email"
-                value={data.personalInfo.email}
-                onChange={(e) => updatePersonalInfo('email', e.target.value)}
-                placeholder="john@example.com"
-              />
-            </div>
+              type="email"
+              value={data.personalInfo.email}
+              onChange={(e) => updatePersonalInfo('email', e.target.value)}
+              placeholder="john@example.com"
+            />
+          </div>
             <div>
               <Label htmlFor="phone">Phone</Label>
               <Input
                 id="phone"
-                type="tel"
-                value={data.personalInfo.phone}
-                onChange={(e) => updatePersonalInfo('phone', e.target.value)}
-                placeholder="+1 (555) 123-4567"
-              />
-            </div>
+              type="tel"
+              value={data.personalInfo.phone}
+              onChange={(e) => updatePersonalInfo('phone', e.target.value)}
+              placeholder="+1 (555) 123-4567"
+            />
           </div>
+        </div>
           <div>
             <Label htmlFor="location">Location</Label>
             <Input
               id="location"
-              type="text"
-              value={data.personalInfo.location}
-              onChange={(e) => updatePersonalInfo('location', e.target.value)}
-              placeholder="San Francisco, CA"
-            />
-          </div>
+            type="text"
+            value={data.personalInfo.location}
+            onChange={(e) => updatePersonalInfo('location', e.target.value)}
+            placeholder="San Francisco, CA"
+          />
+        </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="linkedin">LinkedIn</Label>
               <Input
                 id="linkedin"
-                type="url"
-                value={data.personalInfo.linkedin}
-                onChange={(e) => updatePersonalInfo('linkedin', e.target.value)}
-                placeholder="linkedin.com/in/johndoe"
-              />
-            </div>
+              type="url"
+              value={data.personalInfo.linkedin}
+              onChange={(e) => updatePersonalInfo('linkedin', e.target.value)}
+              placeholder="linkedin.com/in/johndoe"
+            />
+          </div>
             <div>
               <Label htmlFor="website">Website/Portfolio</Label>
               <Input
                 id="website"
-                type="url"
-                value={data.personalInfo.website}
-                onChange={(e) => updatePersonalInfo('website', e.target.value)}
-                placeholder="johndoe.com"
-              />
-            </div>
+              type="url"
+              value={data.personalInfo.website}
+              onChange={(e) => updatePersonalInfo('website', e.target.value)}
+              placeholder="johndoe.com"
+            />
           </div>
+        </div>
           <div>
             <Label htmlFor="summary">Professional Summary</Label>
             <Textarea
               id="summary"
-              value={data.personalInfo.summary}
-              onChange={(e) => updatePersonalInfo('summary', e.target.value)}
-              placeholder="Brief overview of your professional background and career objectives..."
+            value={data.personalInfo.summary}
+            onChange={(e) => updatePersonalInfo('summary', e.target.value)}
+            placeholder="Brief overview of your professional background and career objectives..."
               rows={4}
-            />
+          />
           </div>
         </div>
       </div>
@@ -324,126 +324,127 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
                   <Label htmlFor={`company-${exp.id}`}>Company</Label>
                   <Input
                     id={`company-${exp.id}`}
-                    type="text"
-                    value={exp.company}
-                    onChange={(e) =>
-                      updateWorkExperience(exp.id, 'company', e.target.value)
-                    }
-                    placeholder="Company Name"
-                  />
-                </div>
+                type="text"
+                value={exp.company}
+                onChange={(e) =>
+                  updateWorkExperience(exp.id, 'company', e.target.value)
+                }
+                placeholder="Company Name"
+              />
+            </div>
                 <div>
                   <Label htmlFor={`position-${exp.id}`}>Position</Label>
                   <Input
                     id={`position-${exp.id}`}
-                    type="text"
-                    value={exp.position}
-                    onChange={(e) =>
-                      updateWorkExperience(exp.id, 'position', e.target.value)
-                    }
-                    placeholder="Job Title"
-                  />
-                </div>
+                type="text"
+                value={exp.position}
+                onChange={(e) =>
+                  updateWorkExperience(exp.id, 'position', e.target.value)
+                }
+                placeholder="Job Title"
+              />
+            </div>
                 <div>
                   <Label htmlFor={`exp-location-${exp.id}`}>Location</Label>
                   <Input
                     id={`exp-location-${exp.id}`}
-                    type="text"
-                    value={exp.location}
-                    onChange={(e) =>
-                      updateWorkExperience(exp.id, 'location', e.target.value)
-                    }
-                    placeholder="City, State"
-                  />
-                </div>
+                type="text"
+                value={exp.location}
+                onChange={(e) =>
+                  updateWorkExperience(exp.id, 'location', e.target.value)
+                }
+                placeholder="City, State"
+              />
+            </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor={`startDate-${exp.id}`}>Start Date</Label>
                     <Input
                       id={`startDate-${exp.id}`}
-                      type="text"
-                      value={exp.startDate}
-                      onChange={(e) =>
-                        updateWorkExperience(exp.id, 'startDate', e.target.value)
-                      }
-                      placeholder="MM/YYYY"
-                    />
-                  </div>
+                  type="text"
+                  value={exp.startDate}
+                  onChange={(e) =>
+                    updateWorkExperience(exp.id, 'startDate', e.target.value)
+                  }
+                  placeholder="MM/YYYY"
+                />
+              </div>
                   <div>
                     <Label htmlFor={`endDate-${exp.id}`}>End Date</Label>
                     <Input
                       id={`endDate-${exp.id}`}
-                      type="text"
-                      value={exp.endDate}
-                      onChange={(e) =>
-                        updateWorkExperience(exp.id, 'endDate', e.target.value)
-                      }
-                      placeholder="MM/YYYY"
-                      disabled={exp.current}
-                    />
-                  </div>
-                </div>
+                  type="text"
+                  value={exp.endDate}
+                  onChange={(e) =>
+                    updateWorkExperience(exp.id, 'endDate', e.target.value)
+                  }
+                  placeholder="MM/YYYY"
+                  disabled={exp.current}
+                />
+              </div>
+            </div>
                 <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={exp.current}
-                    onChange={(e) =>
-                      updateWorkExperience(exp.id, 'current', e.target.checked)
-                    }
-                    id={`current-${exp.id}`}
+              <input
+                type="checkbox"
+                checked={exp.current}
+                onChange={(e) =>
+                  updateWorkExperience(exp.id, 'current', e.target.checked)
+                }
+                id={`current-${exp.id}`}
                     className="h-4 w-4 rounded border-gray-300"
-                  />
+              />
                   <Label htmlFor={`current-${exp.id}`} className="font-normal cursor-pointer">
                     Currently working here
                   </Label>
-                </div>
+            </div>
                 <div className="space-y-2">
                   <Label>Job Responsibilities</Label>
-                  {exp.description.map((desc, index) => (
+              {exp.description.map((desc, index) => (
                     <div key={index} className="flex gap-2">
                       <Input
-                        type="text"
-                        value={desc}
-                        onChange={(e) =>
-                          updateWorkDescription(exp.id, index, e.target.value)
-                        }
-                        placeholder="Describe your achievement or responsibility..."
-                      />
-                      {exp.description.length > 1 && (
+                    type="text"
+                    value={desc}
+                    onChange={(e) =>
+                      updateWorkDescription(exp.id, index, e.target.value)
+                    }
+                    placeholder="Describe your achievement or responsibility..."
+                  />
+                  {exp.description.length > 1 && (
                         <Button
-                          variant="destructive"
+                          variant="outline"
                           size="icon"
-                          onClick={() => removeWorkDescriptionBullet(exp.id, index)}
-                        >
-                          <Trash2 size={16} />
+                      onClick={() => removeWorkDescriptionBullet(exp.id, index)}
+                          className="border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
+                    >
+                      <Trash2 size={16} />
                         </Button>
-                      )}
-                    </div>
-                  ))}
+                  )}
+                </div>
+              ))}
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => addWorkDescriptionBullet(exp.id)}
+                onClick={() => addWorkDescriptionBullet(exp.id)}
                     className="gap-2"
-                  >
-                    <Plus size={16} />
-                    Add Bullet Point
+              >
+                <Plus size={16} />
+                Add Bullet Point
                   </Button>
-                </div>
+            </div>
                 <Button
-                  variant="destructive"
-                  onClick={() => removeWorkExperience(exp.id)}
-                  className="gap-2"
-                >
-                  <Trash2 size={16} />
-                  Remove Experience
+                  variant="outline"
+              onClick={() => removeWorkExperience(exp.id)}
+                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
+            >
+              <Trash2 size={16} />
+              Remove Experience
                 </Button>
               </CardContent>
             </Card>
-          ))}
+        ))}
           <Button onClick={addWorkExperience} className="gap-2 w-full">
-            <Plus size={18} />
-            Add Work Experience
+          <Plus size={18} />
+          Add Work Experience
           </Button>
         </div>
       </div>
@@ -452,89 +453,89 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
       <div>
         <h2 className="text-2xl font-bold mb-6">Education</h2>
         <div className="space-y-4">
-          {data.education.map((edu) => (
+        {data.education.map((edu) => (
             <Card key={edu.id} className="border-2">
               <CardContent className="pt-6 space-y-4">
                 <div>
                   <Label htmlFor={`school-${edu.id}`}>School/University</Label>
                   <Input
                     id={`school-${edu.id}`}
-                    type="text"
-                    value={edu.school}
-                    onChange={(e) => updateEducation(edu.id, 'school', e.target.value)}
-                    placeholder="University Name"
-                  />
-                </div>
+                type="text"
+                value={edu.school}
+                onChange={(e) => updateEducation(edu.id, 'school', e.target.value)}
+                placeholder="University Name"
+              />
+            </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor={`degree-${edu.id}`}>Degree</Label>
                     <Input
                       id={`degree-${edu.id}`}
-                      type="text"
-                      value={edu.degree}
-                      onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
-                      placeholder="Bachelor of Science"
-                    />
-                  </div>
+                  type="text"
+                  value={edu.degree}
+                  onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
+                  placeholder="Bachelor of Science"
+                />
+              </div>
                   <div>
                     <Label htmlFor={`field-${edu.id}`}>Field of Study</Label>
                     <Input
                       id={`field-${edu.id}`}
-                      type="text"
-                      value={edu.field}
-                      onChange={(e) => updateEducation(edu.id, 'field', e.target.value)}
-                      placeholder="Computer Science"
-                    />
-                  </div>
-                </div>
+                  type="text"
+                  value={edu.field}
+                  onChange={(e) => updateEducation(edu.id, 'field', e.target.value)}
+                  placeholder="Computer Science"
+                />
+              </div>
+            </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor={`edu-location-${edu.id}`}>Location</Label>
                     <Input
                       id={`edu-location-${edu.id}`}
-                      type="text"
-                      value={edu.location}
-                      onChange={(e) => updateEducation(edu.id, 'location', e.target.value)}
-                      placeholder="City, State"
-                    />
-                  </div>
+                  type="text"
+                  value={edu.location}
+                  onChange={(e) => updateEducation(edu.id, 'location', e.target.value)}
+                  placeholder="City, State"
+                />
+              </div>
                   <div>
                     <Label htmlFor={`graduationDate-${edu.id}`}>Graduation Date</Label>
                     <Input
                       id={`graduationDate-${edu.id}`}
-                      type="text"
-                      value={edu.graduationDate}
-                      onChange={(e) =>
-                        updateEducation(edu.id, 'graduationDate', e.target.value)
-                      }
-                      placeholder="MM/YYYY"
-                    />
-                  </div>
-                </div>
+                  type="text"
+                  value={edu.graduationDate}
+                  onChange={(e) =>
+                    updateEducation(edu.id, 'graduationDate', e.target.value)
+                  }
+                  placeholder="MM/YYYY"
+                />
+              </div>
+            </div>
                 <div>
                   <Label htmlFor={`gpa-${edu.id}`}>GPA (Optional)</Label>
                   <Input
                     id={`gpa-${edu.id}`}
-                    type="text"
-                    value={edu.gpa || ''}
-                    onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)}
-                    placeholder="3.8/4.0"
-                  />
-                </div>
+                type="text"
+                value={edu.gpa || ''}
+                onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)}
+                placeholder="3.8/4.0"
+              />
+            </div>
                 <Button
-                  variant="destructive"
-                  onClick={() => removeEducation(edu.id)}
-                  className="gap-2"
-                >
-                  <Trash2 size={16} />
-                  Remove Education
+                  variant="outline"
+              onClick={() => removeEducation(edu.id)}
+                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
+            >
+              <Trash2 size={16} />
+              Remove Education
                 </Button>
               </CardContent>
             </Card>
-          ))}
+        ))}
           <Button onClick={addEducation} className="gap-2 w-full">
-            <Plus size={18} />
-            Add Education
+          <Plus size={18} />
+          Add Education
           </Button>
         </div>
       </div>
@@ -543,7 +544,7 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
       <div>
         <h2 className="text-2xl font-bold mb-6">Skills</h2>
         <div className="space-y-4">
-          {data.skills.map((skill) => (
+        {data.skills.map((skill) => (
             <Card key={skill.id} className="border-2">
               <CardContent className="pt-6 space-y-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -551,37 +552,37 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
                     <Label htmlFor={`skill-name-${skill.id}`}>Skill Name</Label>
                     <Input
                       id={`skill-name-${skill.id}`}
-                      type="text"
-                      value={skill.name}
-                      onChange={(e) => updateSkill(skill.id, 'name', e.target.value)}
-                      placeholder="React, Python, Leadership..."
-                    />
-                  </div>
+                  type="text"
+                  value={skill.name}
+                  onChange={(e) => updateSkill(skill.id, 'name', e.target.value)}
+                  placeholder="React, Python, Leadership..."
+                />
+              </div>
                   <div>
                     <Label htmlFor={`skill-category-${skill.id}`}>Category</Label>
                     <Input
                       id={`skill-category-${skill.id}`}
-                      type="text"
-                      value={skill.category}
-                      onChange={(e) => updateSkill(skill.id, 'category', e.target.value)}
-                      placeholder="Technical, Soft Skills..."
-                    />
-                  </div>
-                </div>
+                  type="text"
+                  value={skill.category}
+                  onChange={(e) => updateSkill(skill.id, 'category', e.target.value)}
+                  placeholder="Technical, Soft Skills..."
+                />
+              </div>
+            </div>
                 <Button
-                  variant="destructive"
-                  onClick={() => removeSkill(skill.id)}
-                  className="gap-2"
-                >
-                  <Trash2 size={16} />
-                  Remove Skill
+                  variant="outline"
+              onClick={() => removeSkill(skill.id)}
+                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
+            >
+              <Trash2 size={16} />
+              Remove Skill
                 </Button>
               </CardContent>
             </Card>
-          ))}
+        ))}
           <Button onClick={addSkill} className="gap-2 w-full">
-            <Plus size={18} />
-            Add Skill
+          <Plus size={18} />
+          Add Skill
           </Button>
         </div>
       </div>
@@ -616,9 +617,9 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
                   </div>
                 </div>
                 <Button
-                  variant="destructive"
+                  variant="outline"
                   onClick={() => removeLanguage(language.id)}
-                  className="gap-2"
+                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
                 >
                   <Trash2 size={16} />
                   Remove Language
@@ -683,9 +684,9 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
                   />
                 </div>
                 <Button
-                  variant="destructive"
+                  variant="outline"
                   onClick={() => removeCertification(cert.id)}
-                  className="gap-2"
+                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
                 >
                   <Trash2 size={16} />
                   Remove Certification
@@ -760,9 +761,9 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
                   />
                 </div>
                 <Button
-                  variant="destructive"
+                  variant="outline"
                   onClick={() => removeProject(project.id)}
-                  className="gap-2"
+                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
                 >
                   <Trash2 size={16} />
                   Remove Project

@@ -48,9 +48,9 @@ export default function ClassicTemplate({ data }: TemplateProps) {
         </div>
         {(personalInfo.linkedin || personalInfo.website) && (
           <div style={{ fontSize: '11px', color: '#555', marginTop: '4px' }}>
-            {personalInfo.linkedin && <span>{personalInfo.linkedin}</span>}
+            {personalInfo.linkedin && <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>{personalInfo.linkedin}</a>}
             {personalInfo.linkedin && personalInfo.website && <span> | </span>}
-            {personalInfo.website && <span>{personalInfo.website}</span>}
+            {personalInfo.website && <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>{personalInfo.website}</a>}
           </div>
         )}
       </div>

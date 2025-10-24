@@ -54,9 +54,9 @@ export default function ModernTemplate({ data }: TemplateProps) {
           {personalInfo.location && <span>•</span>}
           {personalInfo.location && <span>{personalInfo.location}</span>}
           {personalInfo.linkedin && <span>•</span>}
-          {personalInfo.linkedin && <span style={{ color: '#3b82f6' }}>{personalInfo.linkedin}</span>}
+          {personalInfo.linkedin && <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.linkedin}</a>}
           {personalInfo.website && <span>•</span>}
-          {personalInfo.website && <span style={{ color: '#3b82f6' }}>{personalInfo.website}</span>}
+          {personalInfo.website && <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none' }}>{personalInfo.website}</a>}
         </div>
       </div>
 

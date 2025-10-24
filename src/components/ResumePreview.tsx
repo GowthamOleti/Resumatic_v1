@@ -6,6 +6,7 @@ import ProfessionalTemplate from './templates/ProfessionalTemplate';
 import ExecutiveTemplate from './templates/ExecutiveTemplate';
 import CreativeTemplate from './templates/CreativeTemplate';
 import TechnicalTemplate from './templates/TechnicalTemplate';
+import UglyTemplate from './templates/UglyTemplate';
 
 interface ResumePreviewProps {
   data: ResumeData;
@@ -29,6 +30,8 @@ export default function ResumePreview({ data, template }: ResumePreviewProps) {
         return <CreativeTemplate data={data} />;
       case 'technical':
         return <TechnicalTemplate data={data} />;
+      case 'ugly':
+        return <UglyTemplate data={data} />;
       default:
         return <ModernTemplate data={data} />;
     }

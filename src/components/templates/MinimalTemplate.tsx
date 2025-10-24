@@ -43,8 +43,8 @@ export default function MinimalTemplate({ data }: TemplateProps) {
           {personalInfo.email && <span>{personalInfo.email}</span>}
           {personalInfo.phone && <span>{personalInfo.phone}</span>}
           {personalInfo.location && <span>{personalInfo.location}</span>}
-          {personalInfo.linkedin && <span>{personalInfo.linkedin}</span>}
-          {personalInfo.website && <span>{personalInfo.website}</span>}
+          {personalInfo.linkedin && <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#000000', textDecoration: 'underline' }}>{personalInfo.linkedin}</a>}
+          {personalInfo.website && <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#000000', textDecoration: 'underline' }}>{personalInfo.website}</a>}
         </div>
       </div>
 

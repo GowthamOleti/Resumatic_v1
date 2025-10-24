@@ -95,7 +95,7 @@ export default function CreativeTemplate({ data }: TemplateProps) {
               borderRadius: '6px',
               backdropFilter: 'blur(10px)'
             }}>
-              {personalInfo.linkedin}
+              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>{personalInfo.linkedin}</a>
             </div>
           )}
           {personalInfo.website && (
@@ -105,7 +105,7 @@ export default function CreativeTemplate({ data }: TemplateProps) {
               borderRadius: '6px',
               backdropFilter: 'blur(10px)'
             }}>
-              {personalInfo.website}
+              <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>{personalInfo.website}</a>
             </div>
           )}
         </div>

@@ -68,7 +68,7 @@ export interface ResumeData {
   projects: Project[];
 }
 
-export type TemplateType = 'modern' | 'classic' | 'minimal' | 'professional' | 'executive' | 'creative' | 'technical';
+export type TemplateType = 'modern' | 'classic' | 'minimal' | 'professional' | 'executive' | 'creative' | 'technical' | 'ugly';
 
 export interface ATSScore {
   overall: number;

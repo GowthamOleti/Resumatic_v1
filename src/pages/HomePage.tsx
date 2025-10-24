@@ -105,63 +105,43 @@ export default function HomePage() {
             </p>
             
             {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in animation-delay-600 mb-8 sm:mb-10">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in animation-delay-600 mb-12 sm:mb-16">
               <Link to="/builder">
                 <Button size="lg" className="gap-2 text-lg h-14 px-10 bg-blue-600 hover:bg-blue-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full sm:w-auto">
                   Start Building for Free <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
             </div>
-
-            {/* Key Selling Points */}
-            <div className="mb-12 sm:mb-16 animate-fade-in animation-delay-600 max-w-3xl mx-auto">
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 px-4">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 border-2 border-green-500">
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
-                  <span className="font-semibold text-green-900">100% Free Forever</span>
-                </div>
-                
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border-2 border-blue-500">
-                  <Download className="h-5 w-5 text-blue-600" />
-                  <span className="font-semibold text-blue-900">Unlimited Downloads</span>
-                </div>
-                
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 border-2 border-purple-500">
-                  <Zap className="h-5 w-5 text-purple-600" />
-                  <span className="font-semibold text-purple-900">No Sign-in Required</span>
-                </div>
-              </div>
-            </div>
           
             {/* Feature Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto animate-fade-in animation-delay-600 px-4">
-              <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+              <div className="flex flex-col items-center gap-3 p-6 rounded-xl bg-white/40 backdrop-blur-sm border border-green-100 hover:border-green-200 transition-all">
+                <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center">
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">Completely Free</h3>
-                  <p className="text-sm text-gray-600">No payment, no credit card</p>
+                  <h3 className="font-medium text-gray-900 mb-1">Completely Free</h3>
+                  <p className="text-xs text-gray-500">No payment, no credit card</p>
                 </div>
               </div>
               
-              <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Download className="h-6 w-6 text-blue-600" />
+              <div className="flex flex-col items-center gap-3 p-6 rounded-xl bg-white/40 backdrop-blur-sm border border-blue-100 hover:border-blue-200 transition-all">
+                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                  <Download className="h-5 w-5 text-blue-600" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">Unlimited Downloads</h3>
-                  <p className="text-sm text-gray-600">Download as many times as you want</p>
+                  <h3 className="font-medium text-gray-900 mb-1">Unlimited Downloads</h3>
+                  <p className="text-xs text-gray-500">Download as many times as you want</p>
                 </div>
               </div>
               
-              <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                  <Zap className="h-6 w-6 text-purple-600" />
+              <div className="flex flex-col items-center gap-3 p-6 rounded-xl bg-white/40 backdrop-blur-sm border border-purple-100 hover:border-purple-200 transition-all">
+                <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center">
+                  <Zap className="h-5 w-5 text-purple-600" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">No Account Needed</h3>
-                  <p className="text-sm text-gray-600">Start building instantly</p>
+                  <h3 className="font-medium text-gray-900 mb-1">No Account Needed</h3>
+                  <p className="text-xs text-gray-500">Start building instantly</p>
                 </div>
               </div>
             </div>

@@ -80,12 +80,12 @@ export default function TechnicalTemplate({ data }: TemplateProps) {
           )}
           {personalInfo.linkedin && (
             <div>
-              <span style={{ color: '#38bdf8' }}>linkedin:</span> <span style={{ color: '#60a5fa' }}>{personalInfo.linkedin}</span>
+              <span style={{ color: '#38bdf8' }}>linkedin:</span> <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#60a5fa', textDecoration: 'none' }}>{personalInfo.linkedin}</a>
             </div>
           )}
           {personalInfo.website && (
             <div>
-              <span style={{ color: '#38bdf8' }}>website:</span> <span style={{ color: '#60a5fa' }}>{personalInfo.website}</span>
+              <span style={{ color: '#38bdf8' }}>website:</span> <a href={personalInfo.website} target="_blank" rel="noopener noreferrer" style={{ color: '#60a5fa', textDecoration: 'none' }}>{personalInfo.website}</a>
             </div>
           )}
         </div>

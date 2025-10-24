@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, Sparkles, Briefcase, Code, Palette, FileText, Building2, Minimize2 } from 'lucide-react';
+import { CheckCircle2, Sparkles, Briefcase, Code, Palette, FileText, Building2, Minimize2, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface TemplateSelectorProps {
@@ -104,6 +104,17 @@ const templates: TemplateInfo[] = [
     bgGradient: 'from-gray-500 to-gray-700',
     features: ['Minimalist', 'White space', 'Simple'],
     imageUrl: 'https://static.wixstatic.com/media/5c0589_3f9e69e6d61f4495a0502193c206bc8e~mv2.png',
+  },
+  {
+    id: 'ugly',
+    name: 'I Don\'t Want a Job',
+    description: 'Comic Sans, rainbow gradients, and pure chaos',
+    icon: <XCircle className="h-5 w-5" />,
+    color: 'text-red-600',
+    bgGradient: 'from-red-500 to-orange-600',
+    features: ['Comic Sans', 'Rainbow chaos', 'NOT ATS-friendly'],
+    imageUrl: 'https://images.unsplash.com/photo-1618556450994-a6a128ef0d9d?w=400&h=500&fit=crop',
+    new: true
   },
 ];
 
