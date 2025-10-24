@@ -26,10 +26,10 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-white relative overflow-hidden transition-colors duration-300">
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl -z-10 animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-400/20 to-pink-400/20 rounded-full blur-3xl -z-10 animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gray-100 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gray-100 rounded-full blur-3xl -z-10" />
       {/* Navigation */}
       <nav className={`border-b border-white/20 bg-white/70 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-lg shadow-black/5 transition-all duration-300 ${
         isScrolled ? 'translate-y-0' : '-translate-y-full'
@@ -45,7 +45,7 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link to="/builder">
-                <Button size="sm" className="gap-1.5 sm:gap-2 h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg shadow-blue-500/30">
+                <Button size="sm" className="gap-1.5 sm:gap-2 h-9 sm:h-10 text-sm sm:text-base bg-blue-600 hover:bg-blue-700 shadow-lg">
                   Get Started <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </Link>
@@ -55,12 +55,11 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+      <section className="relative overflow-hidden bg-white">
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/5 to-purple-400/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 -left-20 w-72 h-72 bg-gray-100 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gray-100 rounded-full blur-3xl"></div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 relative">
@@ -238,7 +237,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="relative overflow-hidden py-16 sm:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700"></div>
+        <div className="absolute inset-0 bg-gray-900"></div>
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
