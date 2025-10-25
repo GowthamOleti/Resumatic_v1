@@ -4,23 +4,15 @@ import { ResumeData, TemplateType } from '../types';
 
 export async function exportToPDF(data: ResumeData, _template: TemplateType): Promise<void> {
   try {
-    // Look for the first A4 page in the preview
-    const resumeElement = document.querySelector('.a4-page .page-content');
+    // Find all A4 pages in the preview
+    const pages = document.querySelectorAll('.a4-page .page-content');
     
-    if (!resumeElement) {
+    if (!pages || pages.length === 0) {
       throw new Error('Resume preview element not found');
     }
 
     // Wait for any images/fonts to load
     await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Create canvas from the resume element
-    const canvas = await html2canvas(resumeElement, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff'
-    });
 
     // Create PDF with A4 dimensions
     const pdf = new jsPDF({
@@ -29,12 +21,28 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       format: 'a4'
     });
 
-    // Add image to PDF with padding
-    const imgData = canvas.toDataURL('image/png');
-    const imgWidth = 194; // A4 width minus padding (210 - 16)
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
-    pdf.addImage(imgData, 'PNG', 8, 8, imgWidth, imgHeight);
+    // Capture each page
+    for (let i = 0; i < pages.length; i++) {
+      // Add new page for subsequent pages
+      if (i > 0) {
+        pdf.addPage();
+      }
+
+      // Create canvas from the page element
+      const canvas = await html2canvas(pages[i] as HTMLElement, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+
+      // Add image to PDF with no extra padding (preview already has padding)
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = 210; // Full A4 width
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    }
 
     // Generate filename
     const fileName = data.personalInfo.fullName
