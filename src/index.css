@@ -183,6 +183,8 @@
 .page-1-content {
   overflow: hidden;
   height: 1063px; /* A4 height minus padding */
+  padding-bottom: 16px; /* Buffer at end of page 1 */
+  box-sizing: border-box;
 }
 
 /* Page 2 - Show content that overflows from page 1 */
@@ -192,6 +194,7 @@
   min-height: 100%;
   /* Offset the content to show the continuation */
   transform: translateY(-1063px);
+  padding-top: 16px; /* Buffer at beginning of page 2 */
 }
 
 .page-break-indicator {
