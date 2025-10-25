@@ -45,24 +45,9 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    // Multi-page logic that actually works
-    const pageWidth = a4Width;
-    
-    // Calculate how many pages we need
-    const contentHeight = imgHeight;
-    const pagesNeeded = Math.ceil(contentHeight / (pageHeight - (2 * paddingMm)));
-    
-    for (let page = 0; page < pagesNeeded; page++) {
-      if (page > 0) {
-        pdf.addPage();
-      }
-      
-      // Calculate the y position for this page
-      const yPosition = paddingMm - (page * (pageHeight - (2 * paddingMm)));
-      
-      // Add the image to this page
-      pdf.addImage(imgData, 'PNG', paddingMm, yPosition, imgWidth, imgHeight);
-    }
+    // Simple approach - just add the image to the first page
+    // Users can see page breaks in the preview, so we just capture what they see
+    pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight);
 
     // Generate filename
     const fileName = data.personalInfo.fullName

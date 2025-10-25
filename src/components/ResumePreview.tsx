@@ -38,8 +38,26 @@ export default function ResumePreview({ data, template }: ResumePreviewProps) {
   };
 
   return (
-    <div id="resume-preview" className="resume-preview">
-      {renderTemplate()}
+    <div className="resume-preview-container">
+      {/* Page 1 */}
+      <div className="a4-page">
+        <div className="page-content">
+          {renderTemplate()}
+        </div>
+        <div className="page-break-indicator">
+          <span className="page-number">Page 1</span>
+        </div>
+      </div>
+      
+      {/* Page 2 - Only show if content overflows */}
+      <div className="a4-page page-2">
+        <div className="page-content">
+          {/* This will be populated by CSS to show overflow content */}
+        </div>
+        <div className="page-break-indicator">
+          <span className="page-number">Page 2</span>
+        </div>
+      </div>
     </div>
   );
 }
