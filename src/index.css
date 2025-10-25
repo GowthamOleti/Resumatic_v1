@@ -179,22 +179,19 @@
   position: relative;
 }
 
-/* Page 1 - Show content up to A4 height, hide overflow */
+/* Page 1 - Allow content to flow naturally */
 .page-1-content {
-  overflow: hidden;
-  height: 1063px; /* A4 height minus padding */
-  padding-bottom: 16px; /* Buffer at end of page 1 */
-  box-sizing: border-box;
+  overflow: visible;
+  height: auto;
+  min-height: calc(1123px - 60px); /* A4 height minus padding */
 }
 
-/* Page 2 - Show content that overflows from page 1 */
+/* Page 2 - Show continuation naturally */
 .page-2-content {
   overflow: visible;
   height: auto;
   min-height: 100%;
-  /* Offset the content to show the continuation */
-  transform: translateY(-1063px);
-  padding-top: 16px; /* Buffer at beginning of page 2 */
+  /* Content flows naturally without transforms */
 }
 
 .page-break-indicator {
