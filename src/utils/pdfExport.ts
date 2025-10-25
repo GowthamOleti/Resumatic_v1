@@ -46,7 +46,6 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     const imgData = canvas.toDataURL('image/png');
     
     // Multi-page logic that actually works
-    const pageHeight = a4Height;
     const pageWidth = a4Width;
     
     // Calculate how many pages we need
