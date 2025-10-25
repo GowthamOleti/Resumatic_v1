@@ -3,59 +3,68 @@ import jsPDF from 'jspdf';
 import { ResumeData, TemplateType } from '../types';
 
 export async function exportToPDF(data: ResumeData, _template: TemplateType): Promise<void> {
+  const resumeElement = document.getElementById('resume-preview');
+  
+  if (!resumeElement) {
+    throw new Error('Resume preview element not found');
+  }
+
   try {
-    // Find all A4 pages in the preview
-    const pages = document.querySelectorAll('.a4-page');
-    
-    if (!pages || pages.length === 0) {
-      throw new Error('Resume preview element not found');
-    }
-
-    console.log(`Found ${pages.length} page(s) to export`);
-
     // Wait for any images/fonts to load
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Temporarily hide page indicators
-    const indicators = document.querySelectorAll('.page-break-indicator');
-    indicators.forEach(ind => (ind as HTMLElement).style.display = 'none');
+    // Create canvas from the resume element with high quality
+    const canvas = await html2canvas(resumeElement, {
+      scale: 2, // High quality rendering
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff',
+      removeContainer: false,
+      imageTimeout: 15000,
+      windowWidth: 794, // A4 width at 96 DPI
+      windowHeight: resumeElement.scrollHeight
+    });
 
-    // Create PDF with A4 dimensions
+    // Calculate dimensions for PDF (A4 size)
+    const a4Width = 210; // A4 width in mm
+    const a4Height = 297; // A4 height in mm
+    const imgWidth = a4Width;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const pageHeight = a4Height;
+    
+    // Create PDF
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: 'a4'
+      format: 'a4',
+      compress: true,
+      hotfixes: ['px_scaling']
     });
 
-    // Capture each page
-    for (let i = 0; i < pages.length; i++) {
-      console.log(`Capturing page ${i + 1}...`);
-      
-      // Add new page for subsequent pages
-      if (i > 0) {
+    // Convert canvas to high-quality image
+    const imgData = canvas.toDataURL('image/png');
+    
+    // Check if content fits on one page
+    if (imgHeight <= pageHeight) {
+      // Single page - fit to page
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    } else {
+      // Multi-page content
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Add first page
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add additional pages if needed
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
         pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
       }
-
-      // Create canvas from the entire page element
-      const canvas = await html2canvas(pages[i] as HTMLElement, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        width: 794,  // A4 width in pixels at 96 DPI
-        height: 1123 // A4 height in pixels at 96 DPI
-      });
-
-      // Add image to PDF
-      const imgData = canvas.toDataURL('image/png');
-      const pdfWidth = 210; // A4 width in mm
-      const pdfHeight = 297; // A4 height in mm
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
     }
-
-    // Restore page indicators
-    indicators.forEach(ind => (ind as HTMLElement).style.display = '');
 
     // Generate filename
     const fileName = data.personalInfo.fullName
@@ -68,11 +77,6 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     console.log('PDF generated successfully:', fileName);
   } catch (error) {
     console.error('Error generating PDF:', error);
-    
-    // Restore page indicators in case of error
-    const indicators = document.querySelectorAll('.page-break-indicator');
-    indicators.forEach(ind => (ind as HTMLElement).style.display = '');
-    
     alert('Failed to generate PDF. Please try again or contact support.');
     throw error;
   }

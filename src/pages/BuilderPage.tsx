@@ -223,6 +223,28 @@ export default function BuilderPage() {
     return names[template];
   };
 
+  const renderTemplate = () => {
+    switch (selectedTemplate) {
+      case 'modern':
+        return <ModernTemplate data={resumeData} />;
+      case 'classic':
+        return <ClassicTemplate data={resumeData} />;
+      case 'minimal':
+        return <MinimalTemplate data={resumeData} />;
+      case 'professional':
+        return <ProfessionalTemplate data={resumeData} />;
+      case 'executive':
+        return <ExecutiveTemplate data={resumeData} />;
+      case 'creative':
+        return <CreativeTemplate data={resumeData} />;
+      case 'technical':
+        return <TechnicalTemplate data={resumeData} />;
+      case 'ugly':
+        return <UglyTemplate data={resumeData} />;
+      default:
+        return <ModernTemplate data={resumeData} />;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -326,7 +348,11 @@ export default function BuilderPage() {
             </div>
             
             <div className="h-[700px] lg:h-[750px] overflow-y-auto p-4 sm:p-6 bg-gray-50 flex items-start justify-center">
-              <ResumePreview data={resumeData} template={selectedTemplate} />
+              <div className="shadow-lg rounded-lg overflow-hidden" style={{ width: '210mm', transform: 'scale(0.85)', transformOrigin: 'top center' }}>
+                <div className="resume-preview">
+                  {renderTemplate()}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -349,8 +375,17 @@ export default function BuilderPage() {
               </div>
             </div>
             <div className="p-4 bg-gray-50 overflow-auto flex items-start justify-center" style={{ minHeight: '500px' }}>
-              <div style={{ transform: 'scale(0.45)', transformOrigin: 'top center', marginBottom: '-400px' }}>
-                <ResumePreview data={resumeData} template={selectedTemplate} />
+              <div className="shadow-lg rounded-lg overflow-hidden" style={{ 
+                width: '210mm', 
+                minWidth: '210mm', 
+                minHeight: '297mm',
+                transform: 'scale(0.45)', 
+                transformOrigin: 'top center',
+                marginBottom: '-400px'
+              }}>
+                <div className="resume-preview">
+                  {renderTemplate()}
+                </div>
               </div>
             </div>
           </div>
