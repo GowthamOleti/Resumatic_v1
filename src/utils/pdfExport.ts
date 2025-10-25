@@ -32,37 +32,41 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     const pageHeight = a4Height;
     
+    // Add padding to prevent text from going to edges
+    const padding = 10; // 10mm padding on all sides
+    const contentWidth = a4Width - (padding * 2);
+    const contentHeight = a4Height - (padding * 2);
+    
     // Create PDF
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
-      compress: true,
-      hotfixes: ['px_scaling']
+      compress: true
     });
 
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
     // Check if content fits on one page
-    if (imgHeight <= pageHeight) {
-      // Single page - fit to page
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    if (imgHeight <= contentHeight) {
+      // Single page - fit to page with padding
+      pdf.addImage(imgData, 'PNG', padding, padding, contentWidth, imgHeight);
     } else {
-      // Multi-page content
+      // Multi-page content with proper page breaks
       let heightLeft = imgHeight;
       let position = 0;
 
       // Add first page
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      pdf.addImage(imgData, 'PNG', padding, padding + position, contentWidth, imgHeight);
+      heightLeft -= contentHeight;
 
       // Add additional pages if needed
       while (heightLeft > 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        pdf.addImage(imgData, 'PNG', padding, padding + position, contentWidth, imgHeight);
+        heightLeft -= contentHeight;
       }
     }
 
