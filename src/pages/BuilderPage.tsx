@@ -223,28 +223,6 @@ export default function BuilderPage() {
     return names[template];
   };
 
-  const renderTemplate = () => {
-    switch (selectedTemplate) {
-      case 'modern':
-        return <ModernTemplate data={resumeData} />;
-      case 'classic':
-        return <ClassicTemplate data={resumeData} />;
-      case 'minimal':
-        return <MinimalTemplate data={resumeData} />;
-      case 'professional':
-        return <ProfessionalTemplate data={resumeData} />;
-      case 'executive':
-        return <ExecutiveTemplate data={resumeData} />;
-      case 'creative':
-        return <CreativeTemplate data={resumeData} />;
-      case 'technical':
-        return <TechnicalTemplate data={resumeData} />;
-      case 'ugly':
-        return <UglyTemplate data={resumeData} />;
-      default:
-        return <ModernTemplate data={resumeData} />;
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white">
