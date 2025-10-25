@@ -167,7 +167,7 @@
   border: 1px solid #e5e7eb;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   page-break-after: always;
 }
 
@@ -197,6 +197,12 @@
 /* Offset the template on page 2 to show continuation */
 .page-2-content > * {
   margin-top: calc(-1063px); /* Negative of page 1 visible height */
+  transform: translateY(0); /* Ensure no additional transforms */
+}
+
+/* Special handling for Executive template with negative margins */
+.page-2-content .executive-template {
+  margin-top: calc(-1063px - 30px); /* Account for Executive's negative margin */
 }
 
 .page-break-indicator {

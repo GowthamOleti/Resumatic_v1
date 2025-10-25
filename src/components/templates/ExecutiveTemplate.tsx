@@ -17,7 +17,7 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
   }, {} as Record<string, string[]>);
 
   return (
-    <div style={{ 
+    <div className="executive-template" style={{ 
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
       display: 'flex',
       width: 'calc(100% + 60px)', /* Extend beyond page padding */
