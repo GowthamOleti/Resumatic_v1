@@ -3,52 +3,38 @@ import jsPDF from 'jspdf';
 import { ResumeData, TemplateType } from '../types';
 
 export async function exportToPDF(data: ResumeData, _template: TemplateType): Promise<void> {
-  // Look for the first A4 page in the preview
-  const resumeElement = document.querySelector('.a4-page .page-content');
-  
-  if (!resumeElement) {
-    throw new Error('Resume preview element not found');
-  }
-
   try {
+    // Look for the first A4 page in the preview
+    const resumeElement = document.querySelector('.a4-page .page-content');
+    
+    if (!resumeElement) {
+      throw new Error('Resume preview element not found');
+    }
+
     // Wait for any images/fonts to load
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Create canvas from the resume element with high quality
+    // Create canvas from the resume element
     const canvas = await html2canvas(resumeElement, {
-      scale: 2, // High quality rendering
+      scale: 2,
       useCORS: true,
       logging: false,
-      backgroundColor: '#ffffff',
-      removeContainer: false,
-      imageTimeout: 15000,
-      windowWidth: 794, // A4 width at 96 DPI
-      windowHeight: resumeElement.scrollHeight
+      backgroundColor: '#ffffff'
     });
 
-    // Calculate dimensions for PDF (A4 size)
-    const a4Width = 210; // A4 width in mm
-    const a4Height = 297; // A4 height in mm
-    const paddingMm = 8; // 8mm padding (much more visible than 2.1mm)
-    const imgWidth = a4Width - (2 * paddingMm);
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const pageHeight = a4Height;
-    
-    // Create PDF
+    // Create PDF with A4 dimensions
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: 'a4',
-      compress: true,
-      hotfixes: ['px_scaling']
+      format: 'a4'
     });
 
-    // Convert canvas to high-quality image
+    // Add image to PDF with padding
     const imgData = canvas.toDataURL('image/png');
+    const imgWidth = 194; // A4 width minus padding (210 - 16)
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
     
-    // Simple approach - just add the image to the first page
-    // Users can see page breaks in the preview, so we just capture what they see
-    pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight);
+    pdf.addImage(imgData, 'PNG', 8, 8, imgWidth, imgHeight);
 
     // Generate filename
     const fileName = data.personalInfo.fullName
