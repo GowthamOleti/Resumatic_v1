@@ -45,33 +45,9 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    // Check if content fits on one page (accounting for padding)
-    const availableHeight = pageHeight - (2 * paddingMm);
-    
-    if (imgHeight <= availableHeight) {
-      // Single page - add image with padding
-      pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight);
-    } else {
-      // Multi-page content - use proper page splitting
-      let yOffset = 0;
-      let pageNumber = 0;
-      
-      while (yOffset < imgHeight) {
-        if (pageNumber > 0) {
-          pdf.addPage();
-        }
-        
-        // Calculate the portion of the image to show on this page
-        const remainingHeight = imgHeight - yOffset;
-        const pageContentHeight = Math.min(remainingHeight, availableHeight);
-        
-        // Add the image portion to the current page
-        pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight, '', 'FAST', 0, -yOffset);
-        
-        yOffset += pageContentHeight;
-        pageNumber++;
-      }
-    }
+    // Simple approach: Let jsPDF handle the page breaks automatically
+    // Add image with padding - jsPDF will automatically create pages as needed
+    pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight, '', 'FAST');
 
     // Generate filename
     const fileName = data.personalInfo.fullName
