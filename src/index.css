@@ -194,14 +194,7 @@
   font-weight: 500;
 }
 
-.page-2 {
-  display: none; /* Initially hidden, will be shown via JavaScript if needed */
-}
-
-/* Show page 2 if content overflows */
-.resume-preview-container:has(.page-content:not(:empty)) .page-2 {
-  display: block;
-}
+/* Page 2 is now controlled by React state */
 
 /* Mobile responsive */
 @media screen and (max-width: 768px) {
