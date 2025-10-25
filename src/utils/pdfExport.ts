@@ -28,8 +28,7 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Calculate dimensions for PDF (A4 size)
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const padding = 8; // 8px padding for text (convert to mm: 8px ≈ 2.1mm at 96 DPI)
-    const paddingMm = 2.1;
+    const paddingMm = 8; // 8mm padding (much more visible than 2.1mm)
     const imgWidth = a4Width - (2 * paddingMm);
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     const pageHeight = a4Height;
@@ -46,25 +45,31 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    // Check if content fits on one page
-    if (imgHeight <= pageHeight) {
+    // Check if content fits on one page (accounting for padding)
+    const availableHeight = pageHeight - (2 * paddingMm);
+    
+    if (imgHeight <= availableHeight) {
       // Single page - add image with padding
       pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight);
     } else {
-      // Multi-page content
-      let heightLeft = imgHeight;
-      let position = paddingMm;
-
-      // Add first page with padding
-      pdf.addImage(imgData, 'PNG', paddingMm, position, imgWidth, imgHeight);
-      heightLeft -= (pageHeight - (2 * paddingMm));
-
-      // Add additional pages if needed
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight + paddingMm;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', paddingMm, position, imgWidth, imgHeight);
-        heightLeft -= (pageHeight - (2 * paddingMm));
+      // Multi-page content - use simpler logic to avoid repetition
+      let yPosition = paddingMm;
+      let remainingHeight = imgHeight;
+      
+      while (remainingHeight > 0) {
+        // Calculate how much of the image fits on current page
+        const pageContentHeight = Math.min(remainingHeight, availableHeight);
+        
+        // Add image to current page
+        pdf.addImage(imgData, 'PNG', paddingMm, yPosition, imgWidth, imgHeight);
+        
+        remainingHeight -= pageContentHeight;
+        
+        // If there's more content, add a new page
+        if (remainingHeight > 0) {
+          pdf.addPage();
+          yPosition = paddingMm;
+        }
       }
     }
 
