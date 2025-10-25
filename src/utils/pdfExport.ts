@@ -3,7 +3,8 @@ import jsPDF from 'jspdf';
 import { ResumeData, TemplateType } from '../types';
 
 export async function exportToPDF(data: ResumeData, _template: TemplateType): Promise<void> {
-  const resumeElement = document.getElementById('resume-preview');
+  // Look for the first A4 page in the preview
+  const resumeElement = document.querySelector('.a4-page .page-content');
   
   if (!resumeElement) {
     throw new Error('Resume preview element not found');
