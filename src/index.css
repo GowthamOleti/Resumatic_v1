@@ -196,7 +196,7 @@
 
 /* Offset the template on page 2 to show continuation */
 .page-2-content > * {
-  margin-top: calc(-1123px + 60px); /* Negative of page 1 height */
+  margin-top: calc(-1063px); /* Negative of page 1 visible height */
 }
 
 .page-break-indicator {
