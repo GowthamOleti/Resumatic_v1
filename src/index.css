@@ -179,6 +179,20 @@
   position: relative;
 }
 
+/* Page 1 - Show full content */
+.a4-page:first-child .page-content {
+  overflow: visible;
+  height: auto;
+  min-height: 100%;
+}
+
+/* Page 2 - Show content that overflows from page 1 */
+.a4-page.page-2 .page-content {
+  overflow: visible;
+  height: auto;
+  min-height: 100%;
+}
+
 .page-break-indicator {
   position: absolute;
   bottom: 5px;

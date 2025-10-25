@@ -79,24 +79,7 @@ export default function ResumePreview({ data, template }: ResumePreviewProps) {
       {showPage2 && (
         <div className="a4-page page-2">
           <div className="page-content">
-            <div className="overflow-content">
-              {/* Show continuation content here */}
-              <div style={{ 
-                position: 'absolute', 
-                top: 0, 
-                left: 0, 
-                right: 0, 
-                bottom: 0,
-                background: 'white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#666',
-                fontSize: '14px'
-              }}>
-                Content continues from Page 1...
-              </div>
-            </div>
+            {renderTemplate()}
           </div>
           <div className="page-break-indicator">
             <span className="page-number">Page 2</span>
