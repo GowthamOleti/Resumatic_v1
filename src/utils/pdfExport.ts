@@ -28,7 +28,9 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Calculate dimensions for PDF (A4 size)
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const imgWidth = a4Width;
+    const padding = 8; // 8px padding for text (convert to mm: 8px ≈ 2.1mm at 96 DPI)
+    const paddingMm = 2.1;
+    const imgWidth = a4Width - (2 * paddingMm);
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     const pageHeight = a4Height;
     
@@ -46,23 +48,23 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     
     // Check if content fits on one page
     if (imgHeight <= pageHeight) {
-      // Single page - add image to first page
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      // Single page - add image with padding
+      pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight);
     } else {
       // Multi-page content
       let heightLeft = imgHeight;
-      let position = 0;
+      let position = paddingMm;
 
-      // Add first page
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      // Add first page with padding
+      pdf.addImage(imgData, 'PNG', paddingMm, position, imgWidth, imgHeight);
+      heightLeft -= (pageHeight - (2 * paddingMm));
 
       // Add additional pages if needed
       while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
+        position = heightLeft - imgHeight + paddingMm;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        pdf.addImage(imgData, 'PNG', paddingMm, position, imgWidth, imgHeight);
+        heightLeft -= (pageHeight - (2 * paddingMm));
       }
     }
 
