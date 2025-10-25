@@ -48,27 +48,8 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Convert canvas to high-quality image
     const imgData = canvas.toDataURL('image/png');
     
-    // Check if content fits on one page
-    if (imgHeight <= contentHeight) {
-      // Single page - fit to page with padding
-      pdf.addImage(imgData, 'PNG', padding, padding, contentWidth, imgHeight);
-    } else {
-      // Multi-page content with proper page breaks
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      // Add first page
-      pdf.addImage(imgData, 'PNG', padding, padding + position, contentWidth, imgHeight);
-      heightLeft -= contentHeight;
-
-      // Add additional pages if needed
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', padding, padding + position, contentWidth, imgHeight);
-        heightLeft -= contentHeight;
-      }
-    }
+    // Always fit content to page with padding - let the content flow naturally
+    pdf.addImage(imgData, 'PNG', padding, padding, contentWidth, imgHeight);
 
     // Generate filename
     const fileName = data.personalInfo.fullName
