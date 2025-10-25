@@ -52,24 +52,24 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       // Single page - add image with padding
       pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight);
     } else {
-      // Multi-page content - use simpler logic to avoid repetition
-      let yPosition = paddingMm;
-      let remainingHeight = imgHeight;
+      // Multi-page content - use proper page splitting
+      let yOffset = 0;
+      let pageNumber = 0;
       
-      while (remainingHeight > 0) {
-        // Calculate how much of the image fits on current page
+      while (yOffset < imgHeight) {
+        if (pageNumber > 0) {
+          pdf.addPage();
+        }
+        
+        // Calculate the portion of the image to show on this page
+        const remainingHeight = imgHeight - yOffset;
         const pageContentHeight = Math.min(remainingHeight, availableHeight);
         
-        // Add image to current page
-        pdf.addImage(imgData, 'PNG', paddingMm, yPosition, imgWidth, imgHeight);
+        // Add the image portion to the current page
+        pdf.addImage(imgData, 'PNG', paddingMm, paddingMm, imgWidth, imgHeight, '', 'FAST', 0, -yOffset);
         
-        remainingHeight -= pageContentHeight;
-        
-        // If there's more content, add a new page
-        if (remainingHeight > 0) {
-          pdf.addPage();
-          yPosition = paddingMm;
-        }
+        yOffset += pageContentHeight;
+        pageNumber++;
       }
     }
 
