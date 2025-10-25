@@ -20,14 +20,15 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
     <div style={{ 
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
       display: 'flex',
-      width: '100%',
-      height: '100%',
+      width: 'calc(100% + 60px)', /* Extend beyond page padding */
+      height: 'calc(100% + 60px)', /* Extend beyond page padding */
+      margin: '-30px', /* Counteract page content padding */
       backgroundColor: '#ffffff',
       color: '#1a1a1a',
       lineHeight: '1.5',
       boxSizing: 'border-box'
     }}>
-      {/* Left Sidebar - Dark Navy */}
+      {/* Left Sidebar - Dark Navy - extends to edges */}
       <div style={{ 
         width: '35%', 
         backgroundColor: '#1e3a5f',
