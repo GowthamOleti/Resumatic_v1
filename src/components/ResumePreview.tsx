@@ -65,9 +65,9 @@ export default function ResumePreview({ data, template }: ResumePreviewProps) {
 
   return (
     <div className="resume-preview-container">
-      {/* Page 1 */}
+      {/* Page 1 - Full content with overflow hidden */}
       <div className="a4-page" ref={page1Ref}>
-        <div className="page-content">
+        <div className="page-content page-1-content">
           {renderTemplate()}
         </div>
         <div className="page-break-indicator">
@@ -75,10 +75,10 @@ export default function ResumePreview({ data, template }: ResumePreviewProps) {
         </div>
       </div>
       
-      {/* Page 2 - Show if content overflows */}
+      {/* Page 2 - Show overflow content only */}
       {showPage2 && (
         <div className="a4-page page-2">
-          <div className="page-content">
+          <div className="page-content page-2-content">
             {renderTemplate()}
           </div>
           <div className="page-break-indicator">
