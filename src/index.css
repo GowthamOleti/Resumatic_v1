@@ -179,19 +179,24 @@
   position: relative;
 }
 
-/* Page 1 - Allow content to flow naturally */
+/* Page 1 - Clip content at A4 boundary */
 .page-1-content {
-  overflow: visible;
-  height: auto;
-  min-height: calc(1123px - 60px); /* A4 height minus padding */
+  overflow: hidden;
+  height: calc(1123px - 60px); /* A4 height minus padding */
+  position: relative;
 }
 
-/* Page 2 - Show continuation naturally */
+/* Page 2 - Show overflow content with proper offset */
 .page-2-content {
   overflow: visible;
   height: auto;
   min-height: 100%;
-  /* Content flows naturally without transforms */
+  position: relative;
+}
+
+/* Offset the template on page 2 to show continuation */
+.page-2-content > * {
+  margin-top: calc(-1123px + 60px); /* Negative of page 1 height */
 }
 
 .page-break-indicator {
