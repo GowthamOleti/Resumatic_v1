@@ -28,9 +28,8 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Calculate dimensions for PDF (A4 size)
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const textMargin = 5; // Small margin for text content (5mm)
-    const pageBreakGap = 3; // Gap at page transitions (3mm ≈ 8px)
-    const imgWidth = a4Width - (textMargin * 2); // Reduce width for margins
+    const pageBreakGap = 3; // Gap at page transitions (3mm ≈ 8px) - only for text breathing room
+    const imgWidth = a4Width; // Full width - no horizontal margins so sidebars extend to edges
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     const pageHeight = a4Height;
     
@@ -48,22 +47,22 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     
     // Check if content fits on one page
     if (imgHeight <= pageHeight) {
-      // Single page - fit to page with text margins
-      pdf.addImage(imgData, 'PNG', textMargin, 0, imgWidth, imgHeight);
+      // Single page - full width, no horizontal margins (sidebars extend to edges)
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
     } else {
-      // Multi-page content with text margins and page break gaps
+      // Multi-page content with page break gaps for text breathing room
       let heightLeft = imgHeight;
       let position = 0;
 
       // Add first page (end slightly early to create gap)
-      pdf.addImage(imgData, 'PNG', textMargin, position, imgWidth, imgHeight);
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
       heightLeft -= (pageHeight - pageBreakGap);
 
       // Add additional pages if needed (start with gap for breathing room)
       while (heightLeft > 0) {
         position = heightLeft - imgHeight + pageBreakGap;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', textMargin, position, imgWidth, imgHeight);
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
     }
