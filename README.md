@@ -165,7 +165,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the Business Source License 1.1 (BSL). Production hosting or offering the software as a service requires a separate commercial license from the author. On 2028-01-01, the license converts to MIT for the then-current release. See LICENSE.
 
 ## 🙏 Acknowledgments
 

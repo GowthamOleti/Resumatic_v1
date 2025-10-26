@@ -1,23 +1,33 @@
-MIT License
+Business Source License 1.1
 
-Copyright (c) 2025 Gowtham Oleti
+Parameters
+Licensor: Gowtham Oleti
+Licensed Work: Resumatic (this repository)
+Change Date: 2028-01-01
+Change License: MIT
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+License Terms
+The Licensor hereby grants you the right to copy, modify, create derivative
+works, redistribute, and make non-production use of the Licensed Work. The
+Licensor may make an Additional Use Grant, above. The Licensor grants you an
+irrevocable, worldwide, non-exclusive, non-transferable and royalty-free
+license to use, copy, modify, create derivative works, and redistribute the
+Licensed Work only for Non-Production Use, subject to the conditions below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Non-Production Use means use of the Licensed Work for development, testing,
+research, or evaluation purposes, and specifically excludes providing the
+Licensed Work to third parties as a hosted or managed service, or using the
+Licensed Work in production environments to provide a service to third
+parties.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You may make the Licensed Work available to third parties as a service only
+if you have received a separate commercial license from the Licensor.
+
+The Licensed Work is provided “as-is,” without warranty of any kind.
+
+On the Change Date, the License will automatically convert to the Change
+License (MIT) for the then-current release.
+
+For the full text of BSL 1.1, see https://mariadb.com/bsl11/
 
 
