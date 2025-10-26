@@ -28,9 +28,9 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Calculate dimensions for PDF (A4 size)
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const imgWidth = a4Width; // Full width - no horizontal margins so sidebars extend to edges
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const pageHeight = a4Height;
+    // Pixel density mapping to avoid rounding drift
+    const pxPerMm = canvas.width / a4Width; // canvas pixels per mm
+    const pageHeightPx = Math.floor(pxPerMm * a4Height); // page height in canvas pixels
     
     // Create PDF
     const pdf = new jsPDF({
@@ -41,29 +41,36 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       hotfixes: ['px_scaling']
     });
 
-    // Convert canvas to high-quality image
-    const imgData = canvas.toDataURL('image/png');
-    
-    // Check if content fits on one page
-    if (imgHeight <= pageHeight) {
-      // Single page - full width, no horizontal margins (sidebars extend to edges)
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    } else {
-      // Multi-page content - clean page breaks with no duplication
-      let heightLeft = imgHeight;
-      let position = 0;
+    // Slice the tall canvas into discrete A4-height chunks (pixel-accurate, no overlap)
+    let sliceStartY = 0;
+    let pageIndex = 0;
+    while (sliceStartY < canvas.height) {
+      const sliceHeightPx = Math.min(pageHeightPx, canvas.height - sliceStartY);
 
-      // Add first page
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      // Add additional pages if needed
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight; // Continue from where previous page ended
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+      // Create a per-page canvas and draw the slice
+      const pageCanvas = document.createElement('canvas');
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = sliceHeightPx;
+      const pageCtx = pageCanvas.getContext('2d');
+      if (pageCtx) {
+        pageCtx.drawImage(
+          canvas,
+          0, sliceStartY, canvas.width, sliceHeightPx, // src
+          0, 0, canvas.width, sliceHeightPx // dest
+        );
       }
+
+      // Convert slice to image and add to PDF
+      const pageImg = pageCanvas.toDataURL('image/png');
+      const sliceHeightMm = sliceHeightPx / pxPerMm;
+
+      if (pageIndex > 0) {
+        pdf.addPage();
+      }
+      pdf.addImage(pageImg, 'PNG', 0, 0, a4Width, sliceHeightMm);
+
+      sliceStartY += sliceHeightPx;
+      pageIndex += 1;
     }
 
     // Generate filename
