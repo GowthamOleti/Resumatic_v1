@@ -177,9 +177,17 @@ export default function ProfessionalTemplate({ data }: TemplateProps) {
                   </div>
                 </div>
                 {exp.description.some(d => d.trim()) && (
-                  <ul style={{ marginLeft: '16px', color: '#475569', fontSize: '12.5px', marginTop: '6px' }}>
+                  <ul style={{ 
+                    marginLeft: '20px', 
+                    paddingLeft: '0',
+                    color: '#475569', 
+                    fontSize: '12.5px', 
+                    marginTop: '6px',
+                    listStyleType: 'disc',
+                    listStylePosition: 'outside'
+                  }}>
                     {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                      <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5' }}>{desc}</li>
+                      <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', display: 'list-item' }}>{desc}</li>
                     ))}
                   </ul>
                 )}

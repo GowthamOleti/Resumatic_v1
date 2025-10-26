@@ -85,9 +85,16 @@ export default function MinimalTemplate({ data }: TemplateProps) {
                 </div>
               </div>
               {exp.description.some(d => d.trim()) && (
-                <ul style={{ marginLeft: '14px', color: '#444', listStyleType: 'disc', marginTop: '6px' }}>
+                <ul style={{ 
+                  marginLeft: '18px', 
+                  paddingLeft: '0',
+                  color: '#444', 
+                  listStyleType: 'disc', 
+                  marginTop: '6px',
+                  listStylePosition: 'outside'
+                }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <li key={idx} style={{ marginBottom: '3px', lineHeight: '1.5', fontSize: '12.5px' }}>{desc}</li>
+                    <li key={idx} style={{ marginBottom: '3px', lineHeight: '1.5', fontSize: '12.5px', display: 'list-item' }}>{desc}</li>
                   ))}
                 </ul>
               )}

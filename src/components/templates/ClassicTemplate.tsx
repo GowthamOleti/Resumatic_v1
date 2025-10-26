@@ -92,9 +92,17 @@ export default function ClassicTemplate({ data }: TemplateProps) {
                 {exp.company}{exp.location && `, ${exp.location}`}
               </div>
               {exp.description.some(d => d.trim()) && (
-                <ul style={{ marginLeft: '20px', color: '#333', fontSize: '12.5px', marginTop: '4px' }}>
+                <ul style={{ 
+                  marginLeft: '22px', 
+                  paddingLeft: '0',
+                  color: '#333', 
+                  fontSize: '12.5px', 
+                  marginTop: '4px',
+                  listStyleType: 'disc',
+                  listStylePosition: 'outside'
+                }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5' }}>{desc}</li>
+                    <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', display: 'list-item' }}>{desc}</li>
                   ))}
                 </ul>
               )}

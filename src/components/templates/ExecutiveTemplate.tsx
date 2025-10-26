@@ -239,13 +239,16 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
                   </div>
                   {exp.description.some(d => d.trim()) && (
                     <ul style={{ 
-                      marginLeft: '16px', 
+                      marginLeft: '20px', 
+                      paddingLeft: '0',
                       color: '#475569', 
                       fontSize: '12.5px',
-                      lineHeight: '1.6'
+                      lineHeight: '1.6',
+                      listStyleType: 'disc',
+                      listStylePosition: 'outside'
                     }}>
                       {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                        <li key={idx} style={{ marginBottom: '4px' }}>{desc}</li>
+                        <li key={idx} style={{ marginBottom: '4px', display: 'list-item' }}>{desc}</li>
                       ))}
                     </ul>
                   )}
