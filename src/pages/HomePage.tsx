@@ -267,9 +267,17 @@ export default function HomePage() {
               />
               <span className="text-lg font-bold text-gray-900">Resumatic</span>
             </div>
-            <p className="text-xs sm:text-sm text-gray-600 text-center">
-              © 2025 Resumatic. Built with ❤️ for job seekers.
-            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+              <p className="text-xs sm:text-sm text-gray-600 text-center">
+                © 2025 Resumatic. Built with ❤️ for job seekers.
+              </p>
+              <a 
+                href="mailto:oletigowtham8803@gmail.com?subject=Resumatic Feedback"
+                className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                Send Feedback
+              </a>
+            </div>
           </div>
         </div>
       </footer>
