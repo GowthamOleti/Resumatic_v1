@@ -54,13 +54,13 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       let heightLeft = imgHeight;
       let position = 0;
 
-      // Add first page (end slightly early to create gap)
+      // Add first page
       pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= (pageHeight - pageBreakGap);
+      heightLeft -= pageHeight;
 
-      // Add additional pages if needed (start with gap for breathing room)
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight + pageBreakGap;
+      // Add additional pages if needed (with gap at top for breathing room)
+      while (heightLeft > pageBreakGap) { // Only add page if significant content remains
+        position = heightLeft - imgHeight + pageBreakGap; // Start with gap from top
         pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
