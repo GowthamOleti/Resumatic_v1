@@ -28,7 +28,6 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Calculate dimensions for PDF (A4 size)
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const pageBreakMargin = 5; // 5mm margin at page breaks to prevent text cutoff
     const imgWidth = a4Width; // Full width - no horizontal margins so sidebars extend to edges
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     const pageHeight = a4Height;
@@ -50,21 +49,20 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       // Single page - full width, no horizontal margins (sidebars extend to edges)
       pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
     } else {
-      // Multi-page content with margin at page breaks to prevent text cutoff
-      const effectivePageHeight = pageHeight - pageBreakMargin; // Reduce each page by margin
+      // Multi-page content - clean page breaks with no duplication
       let heightLeft = imgHeight;
       let position = 0;
 
       // Add first page
       pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= effectivePageHeight;
+      heightLeft -= pageHeight;
 
-      // Add additional pages if needed - with margin gap at each page break
+      // Add additional pages if needed
       while (heightLeft > 0) {
-        position = -(imgHeight - heightLeft); // Show the next section with gap
+        position = heightLeft - imgHeight; // Continue from where previous page ended
         pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= effectivePageHeight;
+        heightLeft -= pageHeight;
       }
     }
 
