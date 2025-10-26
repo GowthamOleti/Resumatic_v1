@@ -95,9 +95,9 @@ export default function ModernTemplate({ data }: TemplateProps) {
                 {exp.company}{exp.location && ` • ${exp.location}`}
               </div>
               {exp.description.some(d => d.trim()) && (
-                <ul style={{ marginTop: '6px', marginLeft: '16px', color: '#4b5563', fontSize: '13px' }}>
+                <ul style={{ marginTop: '6px', marginLeft: '20px', paddingLeft: '0', color: '#4b5563', fontSize: '13px', listStyleType: 'disc' }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5' }}>{desc}</li>
+                    <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', display: 'list-item' }}>{desc}</li>
                   ))}
                 </ul>
               )}
