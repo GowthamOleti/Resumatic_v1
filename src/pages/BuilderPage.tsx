@@ -216,6 +216,7 @@ export default function BuilderPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>(loadTemplate);
   const [isExporting, setIsExporting] = useState(false);
   const [showTemplateSelector, setShowTemplateSelector] = useState(false);
+  const [showPdfPreview, setShowPdfPreview] = useState(false);
 
   // Save resume data to localStorage whenever it changes
   useEffect(() => {
@@ -241,13 +242,18 @@ export default function BuilderPage() {
 
   const handleExportPDF = async () => {
     setIsExporting(true);
+    setShowPdfPreview(true); // Show hidden preview for PDF generation
+    
     try {
+      // Wait for the preview to render
+      await new Promise(resolve => setTimeout(resolve, 100));
       await exportToPDF(resumeData, selectedTemplate);
     } catch (error) {
       console.error('Error exporting PDF:', error);
       alert('Failed to export PDF. Please try again.');
     } finally {
       setIsExporting(false);
+      setShowPdfPreview(false); // Hide preview after export
     }
   };
 
@@ -445,10 +451,12 @@ export default function BuilderPage() {
           </div>
         </div>
 
-        {/* Hidden Resume for PDF Export - No transforms or scaling */}
-        <div style={{ position: 'fixed', left: '-99999px', top: 0, width: '210mm', opacity: 0, pointerEvents: 'none', zIndex: -9999 }}>
-          <ResumePreview data={resumeData} template={selectedTemplate} />
-        </div>
+        {/* Hidden Resume for PDF Export - Only rendered when exporting */}
+        {showPdfPreview && (
+          <div style={{ position: 'fixed', left: '-99999px', top: 0, width: '210mm', opacity: 0, pointerEvents: 'none', zIndex: -9999 }}>
+            <ResumePreview data={resumeData} template={selectedTemplate} />
+          </div>
+        )}
 
         {/* ATS Score - Bottom Section (Full Width) - DISABLED */}
         {/* <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
