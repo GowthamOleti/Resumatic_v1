@@ -28,11 +28,11 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     // Calculate dimensions for PDF (A4 size)
     const a4Width = 210; // A4 width in mm
     const a4Height = 297; // A4 height in mm
-    const marginX = 5; // Horizontal margin (5mm left/right)
-    const marginY = 8; // Vertical margin (8mm top/bottom for page breaks)
-    const imgWidth = a4Width - (marginX * 2); // Reduce width for margins
+    const textMargin = 5; // Small margin for text content (5mm)
+    const pageBreakGap = 3; // Gap at page transitions (3mm ≈ 8px)
+    const imgWidth = a4Width - (textMargin * 2); // Reduce width for margins
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const pageHeight = a4Height - (marginY * 2); // Usable page height with margins
+    const pageHeight = a4Height;
     
     // Create PDF
     const pdf = new jsPDF({
@@ -48,22 +48,22 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     
     // Check if content fits on one page
     if (imgHeight <= pageHeight) {
-      // Single page - fit to page with margins
-      pdf.addImage(imgData, 'PNG', marginX, marginY, imgWidth, imgHeight);
+      // Single page - fit to page with text margins
+      pdf.addImage(imgData, 'PNG', textMargin, 0, imgWidth, imgHeight);
     } else {
-      // Multi-page content with margins at page breaks
+      // Multi-page content with text margins and page break gaps
       let heightLeft = imgHeight;
-      let position = marginY; // Start with top margin on first page
+      let position = 0;
 
-      // Add first page
-      pdf.addImage(imgData, 'PNG', marginX, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      // Add first page (end slightly early to create gap)
+      pdf.addImage(imgData, 'PNG', textMargin, position, imgWidth, imgHeight);
+      heightLeft -= (pageHeight - pageBreakGap);
 
-      // Add additional pages if needed
+      // Add additional pages if needed (start with gap for breathing room)
       while (heightLeft > 0) {
-        position = (heightLeft - imgHeight) + marginY; // Adjust position with top margin
+        position = heightLeft - imgHeight + pageBreakGap;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', marginX, position, imgWidth, imgHeight);
+        pdf.addImage(imgData, 'PNG', textMargin, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
     }
