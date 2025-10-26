@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Download, ArrowLeft, LayoutTemplate, RotateCcw } from 'lucide-react';
 import { ResumeData, TemplateType } from '@/types';
@@ -16,6 +16,10 @@ import ExecutiveTemplate from '@/components/templates/ExecutiveTemplate';
 import CreativeTemplate from '@/components/templates/CreativeTemplate';
 import TechnicalTemplate from '@/components/templates/TechnicalTemplate';
 import UglyTemplate from '@/components/templates/UglyTemplate';
+
+// LocalStorage keys
+const STORAGE_KEY_RESUME_DATA = 'resumatic_resume_data';
+const STORAGE_KEY_TEMPLATE = 'resumatic_selected_template';
 
 const initialData: ResumeData = {
   personalInfo: {
@@ -181,11 +185,55 @@ const emptyData: ResumeData = {
   projects: [],
 };
 
+// Helper function to load data from localStorage
+const loadResumeData = (): ResumeData => {
+  try {
+    const savedData = localStorage.getItem(STORAGE_KEY_RESUME_DATA);
+    if (savedData) {
+      return JSON.parse(savedData);
+    }
+  } catch (error) {
+    console.error('Error loading resume data from localStorage:', error);
+  }
+  return initialData;
+};
+
+// Helper function to load template from localStorage
+const loadTemplate = (): TemplateType => {
+  try {
+    const savedTemplate = localStorage.getItem(STORAGE_KEY_TEMPLATE);
+    if (savedTemplate) {
+      return savedTemplate as TemplateType;
+    }
+  } catch (error) {
+    console.error('Error loading template from localStorage:', error);
+  }
+  return 'modern';
+};
+
 export default function BuilderPage() {
-  const [resumeData, setResumeData] = useState<ResumeData>(initialData);
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>('modern');
+  const [resumeData, setResumeData] = useState<ResumeData>(loadResumeData);
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>(loadTemplate);
   const [isExporting, setIsExporting] = useState(false);
   const [showTemplateSelector, setShowTemplateSelector] = useState(false);
+
+  // Save resume data to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY_RESUME_DATA, JSON.stringify(resumeData));
+    } catch (error) {
+      console.error('Error saving resume data to localStorage:', error);
+    }
+  }, [resumeData]);
+
+  // Save selected template to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY_TEMPLATE, selectedTemplate);
+    } catch (error) {
+      console.error('Error saving template to localStorage:', error);
+    }
+  }, [selectedTemplate]);
 
   const handleDataChange = (data: ResumeData) => {
     setResumeData(data);
@@ -206,6 +254,12 @@ export default function BuilderPage() {
   const handleReset = () => {
     if (window.confirm('Are you sure you want to clear all data and start fresh? This action cannot be undone.')) {
       setResumeData(emptyData);
+      // Clear localStorage
+      try {
+        localStorage.removeItem(STORAGE_KEY_RESUME_DATA);
+      } catch (error) {
+        console.error('Error clearing localStorage:', error);
+      }
     }
   };
 
