@@ -446,7 +446,7 @@ export default function BuilderPage() {
         </div>
 
         {/* Hidden Resume for PDF Export - No transforms or scaling */}
-        <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
+        <div style={{ position: 'fixed', left: '-99999px', top: 0, width: '210mm', opacity: 0, pointerEvents: 'none', zIndex: -9999 }}>
           <ResumePreview data={resumeData} template={selectedTemplate} />
         </div>
 
