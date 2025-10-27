@@ -59,7 +59,7 @@ export default function ResumeParser({ onParseComplete }: ResumeParserProps) {
     }
   };
 
-  const extractTextFromPDF = async (file: File): Promise<string> => {
+  const extractTextFromPDF = async (_file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       try {
         // For now, simulate PDF text extraction

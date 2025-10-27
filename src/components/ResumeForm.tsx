@@ -95,7 +95,8 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
       degree: '',
       field: '',
       location: '',
-      graduationDate: '',
+      startDate: '',
+      endDate: '',
       gpa: '',
     };
     onChange({ ...data, education: [...data.education, newEdu] });
@@ -500,15 +501,27 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
                 />
               </div>
                   <div>
-                    <Label htmlFor={`graduationDate-${edu.id}`}>Graduation Date</Label>
+                    <Label htmlFor={`startDate-${edu.id}`}>Start Date</Label>
                     <Input
-                      id={`graduationDate-${edu.id}`}
+                      id={`startDate-${edu.id}`}
+                      type="text"
+                      value={edu.startDate}
+                      onChange={(e) =>
+                        updateEducation(edu.id, 'startDate', e.target.value)
+                      }
+                      placeholder="YYYY"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor={`endDate-${edu.id}`}>End Date (or leave blank if current)</Label>
+                    <Input
+                      id={`endDate-${edu.id}`}
                   type="text"
-                  value={edu.graduationDate}
+                      value={edu.endDate}
                   onChange={(e) =>
-                    updateEducation(edu.id, 'graduationDate', e.target.value)
+                        updateEducation(edu.id, 'endDate', e.target.value)
                   }
-                  placeholder="MM/YYYY"
+                      placeholder="YYYY"
                 />
               </div>
             </div>

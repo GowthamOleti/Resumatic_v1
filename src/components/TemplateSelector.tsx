@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Sparkles, Briefcase, Code, Palette, FileText, Building2, Minimize2, XCircle, GraduationCap, Users, Rocket, TrendingUp } from 'lucide-react';
+import { CheckCircle2, Sparkles, Briefcase, Code, FileText, Building2, Minimize2, XCircle, GraduationCap, Users, Rocket, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface TemplateSelectorProps {

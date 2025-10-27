@@ -79,7 +79,7 @@ export default function ATSScanner({ data }: ATSScannerProps) {
     if (data.education.length > 0) {
       eduScore = 50;
       const hasCompleteInfo = data.education.every(edu => 
-        edu.school && edu.degree && edu.field && edu.graduationDate
+        edu.school && edu.degree && edu.field && edu.endDate
       );
       if (hasCompleteInfo) eduScore += 50;
     } else {
