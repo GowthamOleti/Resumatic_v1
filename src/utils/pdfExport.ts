@@ -42,17 +42,27 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
     });
 
     // Only add pages if content exceeds one page
+    console.log('Canvas height:', canvas.height, 'Page height px:', pageHeightPx);
+    
     if (canvas.height <= pageHeightPx) {
       // Single page - fit entire content
+      console.log('Single page detected');
       const pageImg = canvas.toDataURL('image/png');
       const contentHeightMm = (canvas.height / pxPerMm);
       pdf.addImage(pageImg, 'PNG', 0, 0, a4Width, contentHeightMm);
     } else {
       // Multiple pages - slice into A4-height chunks
+      console.log('Multiple pages detected');
       let sliceStartY = 0;
       let pageIndex = 0;
+      
       while (sliceStartY < canvas.height) {
         const sliceHeightPx = Math.min(pageHeightPx, canvas.height - sliceStartY);
+        
+        // Skip if slice is empty or too small
+        if (sliceHeightPx <= 0) {
+          break;
+        }
 
         // Create a per-page canvas and draw the slice
         const pageCanvas = document.createElement('canvas');
@@ -71,6 +81,7 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
         const pageImg = pageCanvas.toDataURL('image/png');
         const sliceHeightMm = sliceHeightPx / pxPerMm;
 
+        // Only add a new page if we're not on the first page
         if (pageIndex > 0) {
           pdf.addPage();
         }
@@ -78,6 +89,8 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
 
         sliceStartY += sliceHeightPx;
         pageIndex += 1;
+        
+        console.log(`Added page ${pageIndex}, height: ${sliceHeightMm}mm`);
       }
     }
 
