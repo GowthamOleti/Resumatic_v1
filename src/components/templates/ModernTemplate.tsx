@@ -95,11 +95,13 @@ export default function ModernTemplate({ data }: TemplateProps) {
                 {exp.company}{exp.location && ` • ${exp.location}`}
               </div>
               {exp.description.some(d => d.trim()) && (
-                <ul style={{ marginTop: '6px', marginLeft: '20px', paddingLeft: '0', color: '#4b5563', fontSize: '13px', listStyleType: 'disc' }}>
+                <div style={{ marginTop: '6px', color: '#4b5563', fontSize: '13px' }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', display: 'list-item' }}>{desc}</li>
+                    <div key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', paddingLeft: '0' }}>
+                      - {desc}
+                    </div>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
           ))}
@@ -166,12 +168,13 @@ export default function ModernTemplate({ data }: TemplateProps) {
                   {edu.degree}{edu.field && ` in ${edu.field}`}
                 </h3>
                 <span style={{ fontSize: '12px', color: '#9ca3af', whiteSpace: 'nowrap', marginLeft: '12px', fontStyle: 'italic' }}>
-                  {edu.graduationDate}
+                  {edu.startDate} - {edu.current ? 'Present' : edu.endDate}
                 </span>
               </div>
               <div style={{ fontSize: '13.5px', color: '#6b7280' }}>
                 {edu.school}{edu.location && ` • ${edu.location}`}
                 {edu.gpa && <span style={{ fontWeight: '500' }}> • GPA: {edu.gpa}</span>}
+                {edu.percentage && <span style={{ fontWeight: '500' }}> • Percentage: {edu.percentage}</span>}
               </div>
             </div>
           ))}

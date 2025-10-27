@@ -41,36 +41,44 @@ export async function exportToPDF(data: ResumeData, _template: TemplateType): Pr
       hotfixes: ['px_scaling']
     });
 
-    // Slice the tall canvas into discrete A4-height chunks (pixel-accurate, no overlap)
-    let sliceStartY = 0;
-    let pageIndex = 0;
-    while (sliceStartY < canvas.height) {
-      const sliceHeightPx = Math.min(pageHeightPx, canvas.height - sliceStartY);
+    // Only add pages if content exceeds one page
+    if (canvas.height <= pageHeightPx) {
+      // Single page - fit entire content
+      const pageImg = canvas.toDataURL('image/png');
+      const contentHeightMm = (canvas.height / pxPerMm);
+      pdf.addImage(pageImg, 'PNG', 0, 0, a4Width, contentHeightMm);
+    } else {
+      // Multiple pages - slice into A4-height chunks
+      let sliceStartY = 0;
+      let pageIndex = 0;
+      while (sliceStartY < canvas.height) {
+        const sliceHeightPx = Math.min(pageHeightPx, canvas.height - sliceStartY);
 
-      // Create a per-page canvas and draw the slice
-      const pageCanvas = document.createElement('canvas');
-      pageCanvas.width = canvas.width;
-      pageCanvas.height = sliceHeightPx;
-      const pageCtx = pageCanvas.getContext('2d');
-      if (pageCtx) {
-        pageCtx.drawImage(
-          canvas,
-          0, sliceStartY, canvas.width, sliceHeightPx, // src
-          0, 0, canvas.width, sliceHeightPx // dest
-        );
+        // Create a per-page canvas and draw the slice
+        const pageCanvas = document.createElement('canvas');
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sliceHeightPx;
+        const pageCtx = pageCanvas.getContext('2d');
+        if (pageCtx) {
+          pageCtx.drawImage(
+            canvas,
+            0, sliceStartY, canvas.width, sliceHeightPx, // src
+            0, 0, canvas.width, sliceHeightPx // dest
+          );
+        }
+
+        // Convert slice to image and add to PDF
+        const pageImg = pageCanvas.toDataURL('image/png');
+        const sliceHeightMm = sliceHeightPx / pxPerMm;
+
+        if (pageIndex > 0) {
+          pdf.addPage();
+        }
+        pdf.addImage(pageImg, 'PNG', 0, 0, a4Width, sliceHeightMm);
+
+        sliceStartY += sliceHeightPx;
+        pageIndex += 1;
       }
-
-      // Convert slice to image and add to PDF
-      const pageImg = pageCanvas.toDataURL('image/png');
-      const sliceHeightMm = sliceHeightPx / pxPerMm;
-
-      if (pageIndex > 0) {
-        pdf.addPage();
-      }
-      pdf.addImage(pageImg, 'PNG', 0, 0, a4Width, sliceHeightMm);
-
-      sliceStartY += sliceHeightPx;
-      pageIndex += 1;
     }
 
     // Generate filename

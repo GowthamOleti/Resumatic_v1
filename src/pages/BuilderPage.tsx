@@ -13,7 +13,6 @@ import ClassicTemplate from '@/components/templates/ClassicTemplate';
 import MinimalTemplate from '@/components/templates/MinimalTemplate';
 import ProfessionalTemplate from '@/components/templates/ProfessionalTemplate';
 import ExecutiveTemplate from '@/components/templates/ExecutiveTemplate';
-import CreativeTemplate from '@/components/templates/CreativeTemplate';
 import TechnicalTemplate from '@/components/templates/TechnicalTemplate';
 import UglyTemplate from '@/components/templates/UglyTemplate';
 
@@ -85,7 +84,8 @@ const initialData: ResumeData = {
       degree: 'Master of Business Administration',
       field: 'Technology Management',
       location: 'Stanford, CA',
-      graduationDate: '2016',
+      startDate: '2014',
+      endDate: '2016',
       gpa: '3.8'
     },
     {
@@ -94,7 +94,8 @@ const initialData: ResumeData = {
       degree: 'Bachelor of Science',
       field: 'Computer Science',
       location: 'Berkeley, CA',
-      graduationDate: '2014',
+      startDate: '2010',
+      endDate: '2014',
       gpa: '3.7'
     }
   ],
@@ -236,7 +237,13 @@ export default function BuilderPage() {
   }, [selectedTemplate]);
 
   const handleDataChange = (data: ResumeData) => {
-    setResumeData(data);
+    console.log('BuilderPage: handleDataChange called with:', data);
+    try {
+      setResumeData(data);
+      console.log('BuilderPage: Resume data updated successfully');
+    } catch (error) {
+      console.error('BuilderPage: Error updating resume data:', error);
+    }
   };
 
   const handleExportPDF = async () => {
@@ -269,10 +276,9 @@ export default function BuilderPage() {
       classic: 'Classic',
       minimal: 'Minimal',
       professional: 'Professional',
-      executive: 'Executive',
-      creative: 'Creative',
-      technical: 'Technical',
-      ugly: 'I Don\'t Want a Job'
+    executive: 'Executive',
+    technical: 'Technical',
+    ugly: 'I Don\'t Want a Job'
     };
     return names[template];
   };
@@ -289,8 +295,6 @@ export default function BuilderPage() {
         return <ProfessionalTemplate data={resumeData} />;
       case 'executive':
         return <ExecutiveTemplate data={resumeData} />;
-      case 'creative':
-        return <CreativeTemplate data={resumeData} />;
       case 'technical':
         return <TechnicalTemplate data={resumeData} />;
       case 'ugly':

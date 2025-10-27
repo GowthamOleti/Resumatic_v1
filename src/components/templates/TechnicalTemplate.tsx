@@ -241,19 +241,13 @@ export default function TechnicalTemplate({ data }: TemplateProps) {
                   </div>
                 )}
                 {exp.description.some(d => d.trim()) && (
-                  <ul style={{ 
-                    marginLeft: '16px', 
-                    color: '#475569', 
-                    fontSize: '11.5px',
-                    lineHeight: '1.6',
-                    marginTop: '8px'
-                  }}>
+                  <div style={{ marginTop: '8px', color: '#475569', fontSize: '11.5px', lineHeight: '1.6' }}>
                     {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                      <li key={idx} style={{ marginBottom: '4px' }}>
-                        <span style={{ color: '#10b981' }}>▸</span> {desc}
-                      </li>
+                      <div key={idx} style={{ marginBottom: '4px' }}>
+                        - {desc}
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 )}
               </div>
             ))}
@@ -383,9 +377,10 @@ export default function TechnicalTemplate({ data }: TemplateProps) {
                   @ {edu.school}
                 </div>
                 <div style={{ fontSize: '10.5px', color: '#64748b' }}>
-                  {edu.graduationDate}
+                  {edu.startDate} - {edu.current ? 'Present' : edu.endDate}
                   {edu.location && ` • ${edu.location}`}
                   {edu.gpa && ` • GPA: ${edu.gpa}`}
+                  {edu.percentage && ` • Percentage: ${edu.percentage}`}
                 </div>
               </div>
             ))}

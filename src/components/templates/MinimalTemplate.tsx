@@ -85,18 +85,13 @@ export default function MinimalTemplate({ data }: TemplateProps) {
                 </div>
               </div>
               {exp.description.some(d => d.trim()) && (
-                <ul style={{ 
-                  marginLeft: '18px', 
-                  paddingLeft: '0',
-                  color: '#444', 
-                  listStyleType: 'disc', 
-                  marginTop: '6px',
-                  listStylePosition: 'outside'
-                }}>
+                <div style={{ marginTop: '6px', color: '#444', fontSize: '12.5px' }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <li key={idx} style={{ marginBottom: '3px', lineHeight: '1.5', fontSize: '12.5px', display: 'list-item' }}>{desc}</li>
+                    <div key={idx} style={{ marginBottom: '3px', lineHeight: '1.5' }}>
+                      - {desc}
+                    </div>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
           ))}
@@ -161,12 +156,13 @@ export default function MinimalTemplate({ data }: TemplateProps) {
                   {edu.degree}{edu.field && ` in ${edu.field}`}
                 </h3>
                 <span style={{ fontSize: '11px', color: '#999', whiteSpace: 'nowrap', marginLeft: '12px' }}>
-                  {edu.graduationDate}
+                  {edu.startDate} - {edu.current ? 'Present' : edu.endDate}
                 </span>
               </div>
               <div style={{ fontSize: '12.5px', color: '#666' }}>
                 {edu.school} · {edu.location}
-                {edu.gpa && <span style={{ color: '#999', marginLeft: '6px' }}>({edu.gpa})</span>}
+                {edu.gpa && <span style={{ color: '#999', marginLeft: '6px' }}>(GPA: {edu.gpa})</span>}
+                {edu.percentage && <span style={{ color: '#999', marginLeft: '6px' }}>(Percentage: {edu.percentage})</span>}
               </div>
             </div>
           ))}

@@ -113,18 +113,6 @@ const templates: TemplateInfo[] = [
     bestFor: ['senior', 'career-change']
   },
   {
-    id: 'creative',
-    name: 'Creative',
-    description: 'Vibrant gradient header with modern visual elements',
-    icon: <Palette className="h-5 w-5" />,
-    color: 'text-purple-600',
-    bgGradient: 'from-purple-500 to-pink-600',
-    features: ['Purple gradient', 'Visual design', 'Stand out'],
-    imageUrl: 'https://static.wixstatic.com/media/5c0589_e7aff14347314152814642eaebd77523~mv2.png',
-    new: true,
-    bestFor: ['student', 'first-job', 'career-change']
-  },
-  {
     id: 'technical',
     name: 'Technical',
     description: 'Code-inspired design perfect for developers',

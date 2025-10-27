@@ -140,13 +140,13 @@ export default function UglyTemplate({ data }: TemplateProps) {
               <div style={{ fontSize: '14px', color: '#00ff00', marginBottom: '8px', fontStyle: 'italic' }}>
                 {exp.startDate} - {exp.current ? 'Still Suffering Here' : exp.endDate}
               </div>
-              <ul style={{ paddingLeft: '20px' }}>
+              <div style={{ marginTop: '8px' }}>
                 {exp.description.map((item, index) => (
-                  item && <li key={index} style={{ marginBottom: '5px', color: '#000000', fontSize: '14px' }}>
-                    {item}
-                  </li>
+                  item && <div key={index} style={{ marginBottom: '5px', color: '#000000', fontSize: '14px' }}>
+                    - {item}
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -181,11 +181,16 @@ export default function UglyTemplate({ data }: TemplateProps) {
                 {edu.degree} - {edu.field}
               </h3>
               <div style={{ fontSize: '15px', color: '#0000ff' }}>
-                {edu.school} | {edu.graduationDate}
+                {edu.school} | {edu.startDate} - {edu.current ? 'Present' : edu.endDate}
               </div>
               {edu.gpa && (
                 <div style={{ fontSize: '14px', color: '#ff0000', fontWeight: 'bold' }}>
                   GPA: {edu.gpa} (Who cares?)
+                </div>
+              )}
+              {edu.percentage && (
+                <div style={{ fontSize: '14px', color: '#ff0000', fontWeight: 'bold' }}>
+                  Percentage: {edu.percentage}% (Still don't care!)
                 </div>
               )}
             </div>

@@ -81,7 +81,7 @@ export default function HomePage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-6 sm:mb-8 animate-fade-in animation-delay-200">
               <Sparkles className="h-4 w-4 text-blue-600" />
-              <span className="text-sm font-medium text-gray-700">Free Professional Resume Builder</span>
+              <span className="text-sm font-medium text-gray-700">Free Professional Resume Builder • 7 Premium Templates</span>
             </div>
 
             {/* Main Headline */}

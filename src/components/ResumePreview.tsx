@@ -4,7 +4,6 @@ import ClassicTemplate from './templates/ClassicTemplate';
 import MinimalTemplate from './templates/MinimalTemplate';
 import ProfessionalTemplate from './templates/ProfessionalTemplate';
 import ExecutiveTemplate from './templates/ExecutiveTemplate';
-import CreativeTemplate from './templates/CreativeTemplate';
 import TechnicalTemplate from './templates/TechnicalTemplate';
 import UglyTemplate from './templates/UglyTemplate';
 
@@ -24,14 +23,12 @@ export default function ResumePreview({ data, template }: ResumePreviewProps) {
         return <MinimalTemplate data={data} />;
       case 'professional':
         return <ProfessionalTemplate data={data} />;
-      case 'executive':
-        return <ExecutiveTemplate data={data} />;
-      case 'creative':
-        return <CreativeTemplate data={data} />;
-      case 'technical':
-        return <TechnicalTemplate data={data} />;
-      case 'ugly':
-        return <UglyTemplate data={data} />;
+        case 'executive':
+          return <ExecutiveTemplate data={data} />;
+        case 'technical':
+          return <TechnicalTemplate data={data} />;
+        case 'ugly':
+          return <UglyTemplate data={data} />;
       default:
         return <ModernTemplate data={data} />;
     }

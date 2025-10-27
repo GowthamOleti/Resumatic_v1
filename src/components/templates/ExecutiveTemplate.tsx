@@ -238,19 +238,13 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
                     </div>
                   </div>
                   {exp.description.some(d => d.trim()) && (
-                    <ul style={{ 
-                      marginLeft: '20px', 
-                      paddingLeft: '0',
-                      color: '#475569', 
-                      fontSize: '12.5px',
-                      lineHeight: '1.6',
-                      listStyleType: 'disc',
-                      listStylePosition: 'outside'
-                    }}>
+                    <div style={{ marginTop: '6px', color: '#475569', fontSize: '12.5px', lineHeight: '1.6' }}>
                       {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                        <li key={idx} style={{ marginBottom: '4px', display: 'list-item' }}>{desc}</li>
+                        <div key={idx} style={{ marginBottom: '4px' }}>
+                          - {desc}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   )}
                 </div>
               ))}
@@ -341,6 +335,7 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
                     {edu.school}
                     {edu.location && ` • ${edu.location}`}
                     {edu.gpa && ` • GPA: ${edu.gpa}`}
+                    {edu.percentage && ` • Percentage: ${edu.percentage}`}
                   </div>
                   <div style={{ 
                     fontSize: '11.5px', 
@@ -348,7 +343,7 @@ export default function ExecutiveTemplate({ data }: TemplateProps) {
                     fontStyle: 'italic',
                     marginTop: '2px'
                   }}>
-                    {edu.graduationDate}
+                    {edu.startDate} - {edu.current ? 'Present' : edu.endDate}
                   </div>
                 </div>
               ))}

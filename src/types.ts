@@ -25,8 +25,11 @@ export interface Education {
   degree: string;
   field: string;
   location: string;
-  graduationDate: string;
+  startDate: string;
+  endDate: string;
+  current?: boolean;
   gpa?: string;
+  percentage?: string;
 }
 
 export interface Skill {
@@ -68,7 +71,7 @@ export interface ResumeData {
   projects: Project[];
 }
 
-export type TemplateType = 'modern' | 'classic' | 'minimal' | 'professional' | 'executive' | 'creative' | 'technical' | 'ugly';
+export type TemplateType = 'modern' | 'classic' | 'minimal' | 'professional' | 'executive' | 'technical' | 'ugly';
 
 export interface ATSScore {
   overall: number;

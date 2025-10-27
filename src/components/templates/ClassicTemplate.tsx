@@ -92,19 +92,13 @@ export default function ClassicTemplate({ data }: TemplateProps) {
                 {exp.company}{exp.location && `, ${exp.location}`}
               </div>
               {exp.description.some(d => d.trim()) && (
-                <ul style={{ 
-                  marginLeft: '22px', 
-                  paddingLeft: '0',
-                  color: '#333', 
-                  fontSize: '12.5px', 
-                  marginTop: '4px',
-                  listStyleType: 'disc',
-                  listStylePosition: 'outside'
-                }}>
+                <div style={{ marginTop: '4px', color: '#333', fontSize: '12.5px' }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <li key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', display: 'list-item' }}>{desc}</li>
+                    <div key={idx} style={{ marginBottom: '4px', lineHeight: '1.5' }}>
+                      - {desc}
+                    </div>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
           ))}
@@ -185,8 +179,10 @@ export default function ClassicTemplate({ data }: TemplateProps) {
                   )}
                 </div>
                 <span style={{ fontSize: '12px', color: '#555', fontStyle: 'italic', whiteSpace: 'nowrap', marginLeft: '12px' }}>
-                  {edu.graduationDate}
+                  {edu.startDate} - {edu.current ? 'Present' : edu.endDate}
                 </span>
+                {edu.gpa && <span style={{ color: '#555', fontWeight: '500', marginLeft: '8px' }}> • GPA: {edu.gpa}</span>}
+                {edu.percentage && <span style={{ color: '#555', fontWeight: '500', marginLeft: '8px' }}> • Percentage: {edu.percentage}</span>}
               </div>
             </div>
           ))}
