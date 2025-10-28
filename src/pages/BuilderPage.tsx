@@ -4,9 +4,11 @@ import { Download, ArrowLeft, LayoutTemplate, RotateCcw } from 'lucide-react';
 import { ResumeData, TemplateType } from '@/types';
 import ResumeForm from '@/components/ResumeForm';
 import ATSScanner from '@/components/ATSScanner';
+import PDFATSUploader from '@/components/PDFATSUploader';
 import TemplateSelector from '@/components/TemplateSelector';
 import { exportToPDF } from '@/utils/pdfExport';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ModernTemplate from '@/components/templates/ModernTemplate';
 import ClassicTemplate from '@/components/templates/ClassicTemplate';
 import MinimalTemplate from '@/components/templates/MinimalTemplate';
@@ -360,6 +362,13 @@ export default function BuilderPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <Tabs defaultValue="builder" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsTrigger value="builder">Resume Builder</TabsTrigger>
+            <TabsTrigger value="upload">Upload & Analyze PDF</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="builder" className="space-y-6">
         {/* Form and Preview - Top Section */}
         <div className="grid lg:grid-cols-[420px_1fr] gap-4 sm:gap-6 mb-4 sm:mb-6">
           {/* Form Panel */}
@@ -462,6 +471,12 @@ export default function BuilderPage() {
           </h2>
           <ATSScanner data={resumeData} />
         </div>
+          </TabsContent>
+          
+          <TabsContent value="upload" className="space-y-6">
+            <PDFATSUploader onParseComplete={handleDataChange} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
