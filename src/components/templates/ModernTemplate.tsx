@@ -6,7 +6,18 @@ interface TemplateProps {
 }
 
 export default function ModernTemplate({ data }: TemplateProps) {
-  const { personalInfo, workExperience, education, skills, languages, certifications, projects } = data;
+  const { personalInfo, workExperience, education, skills, languages, certifications, projects, spacing } = data;
+  
+  // Default spacing values
+  const defaultSpacing = {
+    pageMargin: 20,
+    sectionSpacing: 8,
+    lineSpacing: 1.2,
+    bulletSpacing: 4,
+    headerSpacing: 6,
+  };
+  
+  const spacingSettings = spacing || defaultSpacing;
 
   // Group skills by category
   const groupedSkills = skills.reduce((acc, skill) => {
@@ -20,16 +31,16 @@ export default function ModernTemplate({ data }: TemplateProps) {
   return (
     <div style={{ 
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-      padding: '32px',
+      padding: `${spacingSettings.pageMargin}px`,
       width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',
       color: '#1f2937',
-      lineHeight: '1.5',
+      lineHeight: spacingSettings.lineSpacing,
       boxSizing: 'border-box'
     }}>
       {/* Header */}
-      <div style={{ marginBottom: '24px', paddingBottom: '16px' }}>
+      <div style={{ marginBottom: `${spacingSettings.headerSpacing * 4}px`, paddingBottom: `${spacingSettings.headerSpacing * 2}px` }}>
         <h1 style={{ 
           fontSize: '32px', 
           fontWeight: '700', 
@@ -63,14 +74,14 @@ export default function ModernTemplate({ data }: TemplateProps) {
 
       {/* Summary */}
       {personalInfo.summary && (
-        <div style={{ marginBottom: '24px', lineHeight: '1.6', color: '#4b5563', fontSize: '13.5px' }}>
+        <div style={{ marginBottom: `${spacingSettings.sectionSpacing * 3}px`, lineHeight: spacingSettings.lineSpacing, color: '#4b5563', fontSize: '13.5px' }}>
           {personalInfo.summary}
         </div>
       )}
 
       {/* Work Experience */}
       {workExperience.length > 0 && (
-        <div style={{ marginBottom: '24px' }}>
+        <div style={{ marginBottom: `${spacingSettings.sectionSpacing * 3}px` }}>
           <h2 style={{ 
             fontSize: '15px', 
             fontWeight: '700', 
@@ -95,9 +106,9 @@ export default function ModernTemplate({ data }: TemplateProps) {
                 {exp.company}{exp.location && ` • ${exp.location}`}
               </div>
               {exp.description.some(d => d.trim()) && (
-                <div style={{ marginTop: '6px', color: '#4b5563', fontSize: '13px' }}>
+                <div style={{ marginTop: `${spacingSettings.bulletSpacing}px`, color: '#4b5563', fontSize: '13px' }}>
                   {exp.description.filter(d => d.trim()).map((desc, idx) => (
-                    <div key={idx} style={{ marginBottom: '4px', lineHeight: '1.5', paddingLeft: '0' }}>
+                    <div key={idx} style={{ marginBottom: `${spacingSettings.bulletSpacing}px`, lineHeight: spacingSettings.lineSpacing, paddingLeft: '0' }}>
                       - {desc}
                     </div>
                   ))}

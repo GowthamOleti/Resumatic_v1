@@ -31,6 +31,13 @@ const initialData: ResumeData = {
     website: 'sarahjohnson.dev',
     summary: 'Results-driven Senior Product Manager with 8+ years of experience leading cross-functional teams to deliver innovative digital products. Proven track record of launching successful products that increased user engagement by 40% and revenue by $2M annually. Expert in agile methodologies, user research, and data-driven decision making.',
   },
+  spacing: {
+    pageMargin: 20,
+    sectionSpacing: 8,
+    lineSpacing: 1.2,
+    bulletSpacing: 4,
+    headerSpacing: 6,
+  },
   workExperience: [
     {
       id: '1',

@@ -61,6 +61,14 @@ export interface Project {
   date: string;
 }
 
+export interface SpacingSettings {
+  pageMargin: number; // in mm
+  sectionSpacing: number; // in mm
+  lineSpacing: number; // multiplier
+  bulletSpacing: number; // in mm
+  headerSpacing: number; // in mm
+}
+
 export interface ResumeData {
   personalInfo: PersonalInfo;
   workExperience: WorkExperience[];
@@ -69,6 +77,7 @@ export interface ResumeData {
   languages: Language[];
   certifications: Certification[];
   projects: Project[];
+  spacing?: SpacingSettings;
 }
 
 export type TemplateType = 'modern' | 'classic' | 'minimal' | 'professional' | 'executive' | 'technical' | 'ugly';

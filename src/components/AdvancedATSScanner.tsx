@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AlertCircle, CheckCircle2, XCircle, TrendingUp, Target, FileText } from 'lucide-react';
+import { AlertCircle, CheckCircle2, TrendingUp, Target, FileText } from 'lucide-react';
 import { ResumeData, ATSScore } from '../types';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -271,7 +271,7 @@ export default function AdvancedATSScanner({ data, jobTitle, industry }: Advance
       hasSummary: data.personalInfo.summary.length > 0,
       summaryLength: data.personalInfo.summary.length,
       hasConsistentFormatting: true,
-      potentialIssues: []
+      potentialIssues: [] as string[]
     };
 
     if (!formatAnalysis.hasSummary) {

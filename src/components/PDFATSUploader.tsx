@@ -18,7 +18,6 @@ export default function PDFATSUploader({ onParseComplete }: PDFATSUploaderProps)
   const [status, setStatus] = useState<'idle' | 'uploading' | 'parsing' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string>('');
   const [parsedData, setParsedData] = useState<ResumeData | null>(null);
-  const [extractedText, setExtractedText] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (selectedFile: File) => {
@@ -70,7 +69,7 @@ export default function PDFATSUploader({ onParseComplete }: PDFATSUploaderProps)
       
       reader.onload = async (e) => {
         try {
-          const arrayBuffer = e.target?.result as ArrayBuffer;
+          // const arrayBuffer = e.target?.result as ArrayBuffer;
           
           // For client-side PDF parsing, we'll use a mock implementation
           // In a real implementation, you'd use pdf-parse or similar library
@@ -268,7 +267,6 @@ Google Cloud Professional Developer (2020)`;
     try {
       setStatus('parsing');
       const text = await extractTextFromPDF(file);
-      setExtractedText(text);
       
       const parsedData = parseResumeText(text);
       setParsedData(parsedData);
@@ -293,7 +291,6 @@ Google Cloud Professional Developer (2020)`;
     setStatus('idle');
     setError('');
     setParsedData(null);
-    setExtractedText('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }

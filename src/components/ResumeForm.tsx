@@ -1,10 +1,11 @@
 import { Plus, Trash2 } from 'lucide-react';
-import { ResumeData, WorkExperience, Education, Skill, Language, Certification, Project } from '../types';
+import { ResumeData, WorkExperience, Education, Skill, Language, Certification, Project, SpacingSettings } from '../types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
+import SpacingControls from './SpacingControls';
 
 interface ResumeFormProps {
   data: ResumeData;
@@ -228,6 +229,13 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
     onChange({
       ...data,
       projects: data.projects.filter((proj) => proj.id !== id),
+    });
+  };
+
+  const updateSpacing = (spacing: SpacingSettings) => {
+    onChange({
+      ...data,
+      spacing,
     });
   };
 
@@ -789,6 +797,21 @@ export default function ResumeForm({ data, onChange }: ResumeFormProps) {
             Add Project
           </Button>
         </div>
+      </div>
+
+      {/* Spacing Controls */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Spacing & Layout</h2>
+        <SpacingControls 
+          spacing={data.spacing || {
+            pageMargin: 20,
+            sectionSpacing: 8,
+            lineSpacing: 1.2,
+            bulletSpacing: 4,
+            headerSpacing: 6,
+          }}
+          onChange={updateSpacing}
+        />
       </div>
     </div>
   );
