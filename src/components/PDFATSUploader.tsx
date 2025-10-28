@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { UploadCloud, FileText, XCircle, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { ResumeData } from '@/types';
-import ATSScanner from './ATSScanner';
+import AdvancedATSScanner from './AdvancedATSScanner';
 
 interface PDFATSUploaderProps {
   onParseComplete?: (data: ResumeData) => void;
@@ -386,7 +386,7 @@ Google Cloud Professional Developer (2020)`;
             <AlertCircle className="h-5 w-5 text-blue-600" />
             <h3 className="text-lg font-semibold">ATS Analysis Results</h3>
           </div>
-          <ATSScanner data={parsedData} />
+          <AdvancedATSScanner data={parsedData} />
         </div>
       )}
     </div>

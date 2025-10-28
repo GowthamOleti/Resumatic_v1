@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, ArrowLeft, LayoutTemplate, RotateCcw } from 'lucide-react';
 import { ResumeData, TemplateType } from '@/types';
 import ResumeForm from '@/components/ResumeForm';
-import ATSScanner from '@/components/ATSScanner';
+import AdvancedATSScanner from '@/components/AdvancedATSScanner';
 import PDFATSUploader from '@/components/PDFATSUploader';
 import TemplateSelector from '@/components/TemplateSelector';
 import { exportToPDF } from '@/utils/pdfExport';
@@ -469,7 +469,7 @@ export default function BuilderPage() {
           <h2 className="text-base font-semibold mb-4 text-gray-900">
             ATS Score Analysis
           </h2>
-          <ATSScanner data={resumeData} />
+          <AdvancedATSScanner data={resumeData} />
         </div>
           </TabsContent>
           
