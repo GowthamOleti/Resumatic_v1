@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, ArrowLeft, LayoutTemplate, RotateCcw } from 'lucide-react';
 import { ResumeData, TemplateType } from '@/types';
 import ResumeForm from '@/components/ResumeForm';
-import ResumePreview from '@/components/ResumePreview';
-// import ATSScanner from '@/components/ATSScanner';
+import ATSScanner from '@/components/ATSScanner';
 import TemplateSelector from '@/components/TemplateSelector';
 import { exportToPDF } from '@/utils/pdfExport';
 import { Button } from '@/components/ui/button';
@@ -456,13 +455,13 @@ export default function BuilderPage() {
           </div>
         </div>
 
-        {/* ATS Score - Bottom Section (Full Width) - DISABLED */}
-        {/* <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
+        {/* ATS Score - Bottom Section (Full Width) */}
+        <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
           <h2 className="text-base font-semibold mb-4 text-gray-900">
             ATS Score Analysis
           </h2>
           <ATSScanner data={resumeData} />
-        </div> */}
+        </div>
       </div>
     </div>
   );
