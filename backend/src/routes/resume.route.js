@@ -1,7 +1,7 @@
 import express from 'express';
 import multer from 'multer';
-import { verifyJWT } from '../middleware/auth.js';
-import { createResume, listResumes, parseResume } from '../controllers/resumeController.js';
+import { verifyJWT } from '../middlewares/auth.middleware.js';
+import { createResume, listResumes, parseResume } from '../controllers/resume.controller.js';
 
 const router = express.Router();
 const upload = multer();

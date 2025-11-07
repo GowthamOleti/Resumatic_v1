@@ -1,4 +1,4 @@
-import Resume from '../models/Resume.js';
+import Resume from '../models/resume.model.js';
 import { parseFile } from '../utils/parser.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { ApiError } from '../utils/ApiError.js';

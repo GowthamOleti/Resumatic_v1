@@ -4,8 +4,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 
-import authRoutes from './routes/authRoutes.js';
-import resumeRoutes from './routes/resumeRoutes.js';
+import authRoutes from './routes/auth.route.js';
+import resumeRoutes from './routes/resume.route.js';
 
 const app = express();
 

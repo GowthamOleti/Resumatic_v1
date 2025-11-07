@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import { configurePassport } from '../config/passport.js';
-import { register, login, refresh, logout } from '../controllers/authController.js';
+import { register, login, refresh, logout } from '../controllers/auth.controller.js';
 
 configurePassport();
 
